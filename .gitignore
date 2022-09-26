@@ -1,0 +1,48 @@
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Compiled class file
+*.class
+
+# properties
+*.properties
+
+# db
+*.sql
+
+#context
+/WebContent/META-INF
+/WebContent/WEB-INF
+
+# Log file
+*.log
+
+# build
+/build
+
+
+# Uncomment this line if you wish to ignore the project description file.
+# Typically, this file would be tracked if it contains build/dependency configurations:
+.project
+
+# Java annotation processor (APT)
+.factorypath

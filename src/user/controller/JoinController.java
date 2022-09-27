@@ -28,28 +28,33 @@ public class JoinController extends HttpServlet {
       String usId = req.getParameter("newUsId");
       String usPw = req.getParameter("newUsPw");
       
-      // sql.Date 형식은 yyyy-mm-dd 형으로 들어가야함
       String usBirthday = req.getParameter("get_birth_year") +"-"+  req.getParameter("get_birth_month") +"-"+  req.getParameter("get_birth_day");
       String usPhnum = req.getParameter("usPhnum1") + req.getParameter("usPhnum2") + req.getParameter("usPhnum3");
+      
       String usEmail = req.getParameter("usEmail1") + req.getParameter("usPhnum2");
+      String usEmailAgree  = req.getParameter("usEmailAgree");
       
-      UserDTO joinUser;
       
-      // 이메일 수신 여부에 따라 객체 생성을 다르게 하기
-      if(req.getParameter("usEmailAgree").equals("on")) {
-    	  joinUser = new UserDTO(usId, usPw, usEmail, usPhnum, Date.valueOf(usBirthday), 1);
-      } else {
-    	  joinUser = new UserDTO(usId, usPw, usEmail, usPhnum, Date.valueOf(usBirthday));
-      }
+      System.out.println(usId + " " + usPw);
+      System.out.println(usBirthday);
+      System.out.println(usPhnum);
+      System.out.println(usEmail);
+      System.out.println(usEmailAgree);
+      
+//      UserDAO.joinUser();
+//      UserDTO joinUser = service.joinUser(usId, usPw, usPhnum, usEmail, usBirthday);
+//      UserDTO joinUser = service.joinUser();
+      UserDTO joinUser = new UserDTO(usId, usPw, usEmail, usPhnum, Date.valueOf(usBirthday));
+      System.out.println(joinUser);
       
       try {
-		if(service.joinUser(joinUser)) {
-			resp.sendRedirect("login.jsp");			
-		}
+		service.joinUser(joinUser);
 	} catch (SQLException e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
       
+      resp.sendRedirect("login.jsp");      
    }
 
 }

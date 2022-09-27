@@ -17,7 +17,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 	<!-- 폼태그를 이용해 대여하기 버튼으로 컨트롤로 전달 -->	
-
+	
 	<div id="bookDetailInfo" action="bookinfo" method="get" >
 		<div id=list0 class="tumbnail"></div>
 		<div id=list1 class="card-title">제목:</div>	
@@ -61,11 +61,11 @@
 		   })
 		   
 		   // 호출 완료 시 해당 책이름이 포함되니 모든 데이터가 msg 매게 변수로 JSON 타입의 배열객체로 받아짐
-	       .done(function( msg ) {
-	         	 bookDetailData = msg.documents[0];
-			
-	       })
-	      
+		     .done(function( msg ) {
+		    	 bookDetailData = msg.documents[0];
+				
+		     })
+		     console.log(bookDetailData);
 		     
 			document.getElementById("list0").innerHTML = "<img src='" + bookDetailData.thumbnail+"'/>" + "<input name=\"bkTumbnail\" style=\"display: none\" value= \" " + bookDetailData.thumbnail +"\">"
 			document.getElementById("list1").innerHTML = bookDetailData.title + "<input name=\"bkTitle\" style=\"display: none\" value= \" " + bookDetailData.title +"\">" ;
@@ -75,15 +75,14 @@
 			document.getElementById("list5").innerHTML = bookDetailData.contents + "<input name=\"bkContents\" style=\"display: none\" value= \" " + bookDetailData.contents +"\">";
 			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"'>MoreView</a>" + "<input name=\"bkUrl\" style=\"display: none\" value= \" " + bookDetailData.url +"\">"
 			+ "<input name=\"bkIsbn\" style=\"display: none\" value= \" " + bookDetailData.isbn +"\">";
+			
+			const bookDetailInfo = documenet.getElementById('bookDetailInfo');
+			bookDetailInfo.addEventListner('click', handleClick());
+			
+			const handleClick = () => {
+				
+			}
 
-			
-		
-
-			
-			
-			
-			
-			
   </script>	
 </body>
 </html>

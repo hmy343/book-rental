@@ -1,23 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>main.jsp</title>
 <!-- 제이쿼리로 API 호출하기 위한 기본 스크립트 공식 홈피 참고 -->
-   <script type="text/javascript"
-  src="https://code.jquery.com/jquery-3.6.1.js"
-  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-  crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.1.js"
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 <link href="./css/font.css" rel="stylesheet" type="text/css">
 <link href="./css/temple.css" rel="stylesheet" type="text/css">
 <link href="./css/bootstrap.css" rel="stylesheet" type="text/css">
 
 <!-- 제이쿼리로 API 호출하기 위한 기본 스크립트 공식 홈피 참고 -->
-     <script type="text/javascript">
+<script type="text/javascript">
 
    //  localStorage.setItem("key", "${key}");
   // 검색 버튼 누르면 호출 하도록 함수 안에 ajax 진행(호출 기능)
@@ -70,10 +70,11 @@
 
 </head>
 <body>
-   <jsp:include page="header.jsp"/>
-   
+	<jsp:include page="header.jsp" />
+
 	<!-- 검색창 -->
 	<div class="tm-hero d-flex justify-content-center align-items-center">
+
         <div class="d-flex tm-search-form">
             <input class="form-control tm-search-input" type="search"  aria-label="Search" id="keyword" placeholder="search">
             <button class="btn btn-outline-success tm-search-btn" type="submit" onclick="search()">

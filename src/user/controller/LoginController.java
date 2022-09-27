@@ -39,6 +39,7 @@ public class LoginController extends HttpServlet {
 			if ("AD".equals(loginUser.getUsGrade())) {
 				req.getRequestDispatcher("adUserList.jsp").forward(req, res);
 			} else {
+//				res.sendRedirect(req.getHeader("Referer"));
 				req.getRequestDispatcher("main.jsp").forward(req, res);
 			}
 			

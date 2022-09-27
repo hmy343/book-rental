@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import user.dto.UserDTO;
 import util.DBUtil;
@@ -62,4 +63,30 @@ public class UserDAO {
 		return false;
 	}
 
+	// AD 등급 제외한 모든 유저 조회
+	public  static ArrayList<UserDTO> getAllUser() throws SQLException{
+		Connection con = null;	
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		ArrayList<UserDTO> alist = null;
+		String query="select * from TB_USERS where TB_USERS.US_GRADE != 'AD'";	
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			alist = new ArrayList<UserDTO>();
+			while(rset.next()){
+				alist.add(new UserDTO(rset.getString(1),rset.getString(2),
+						rset.getString(3),rset.getString(4),rset.getString(5)
+		 				,rset.getInt(6),rset.getDate(7),rset.getInt(8),rset.getDate(9)
+		 				,rset.getInt(10),rset.getDate(11)));
+			}
+		}finally{
+			DBUtil.close(con, pstmt, rset);
+		}
+		return alist;
+	}
+	
 }

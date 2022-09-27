@@ -1,6 +1,5 @@
 package filter;
 
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,58 +14,35 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-/**
- * Servlet Filter implementation class PropertyFilter
- */
-@WebFilter(filterName="/PropertyFilter", urlPatterns={"/main.jsp" , "/BookDetail.jsp" , "/check", "/adUserList.jsp", "/bookinfo"})
+@WebFilter(filterName = "/PropertyFilter", urlPatterns = { "/main.jsp", "/BookDetail.jsp", "/check", "/adUserList.jsp",
+		"/bookinfo" })
 public class PropertyFilter implements Filter {
-		String key;
-    /**
-     * Default constructor. 
-     */
-    public PropertyFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	String key;
 
-	/**
-	 * @see Filter#destroy()
-	 */
+	public PropertyFilter() {
+	}
+
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-
-		// pass the request along the filter chain
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		request.setAttribute("key", key);
-		
+
 		chain.doFilter(request, response);
-		
-		
-		
+
 	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-
-		
-		public void init(FilterConfig fConfig) throws ServletException {
-		      ServletContext sc = fConfig.getServletContext();
-		        Properties properties = new Properties();
-		        try {
-		         properties.load(new FileReader(sc.getRealPath(sc.getInitParameter("APIConfig"))));
-		         key = properties.getProperty("apiKey");
-		      } catch (FileNotFoundException e) {
-		         e.printStackTrace();
-		      } catch (IOException e) {
-		         e.printStackTrace();
-		      }
+	public void init(FilterConfig fConfig) throws ServletException {
+		ServletContext sc = fConfig.getServletContext();
+		Properties properties = new Properties();
+		try {
+			properties.load(new FileReader(sc.getRealPath(sc.getInitParameter("APIConfig"))));
+			key = properties.getProperty("apiKey");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

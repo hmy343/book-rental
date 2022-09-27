@@ -29,9 +29,8 @@ local.properties
 # db
 *.sql
 
-#context
+#META-INF
 /WebContent/META-INF
-/WebContent/WEB-INF
 
 # Log file
 *.log

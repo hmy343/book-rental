@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+/*adHeader*/
+.logo {display: flex; align-items: center;}
+
+.nav-link {padding: 0;}
+
+.contents_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  padding: 70px 0 0 10px;
+  border-right: 1px solid #d3d3d3;
+}
+
+.sidebar-left {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 70px);
+}
+
+.sidebar-nav li .nav-link {
+  color: #333;
+  font-weight: 500;
+}
+
+main {
+  padding-top: 90px;;
+}
+
+
+/* rental-status */
+.rental-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  margin-bottom: 50px;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, .1);
+}
+
+
+
+
+/* 회원가입 */
+.phone_num {
+  display: flex;
+  justify-content: space-between;
+}

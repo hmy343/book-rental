@@ -12,7 +12,7 @@
 </style>
 </head>
 <body>
-	
+	<jsp:include page="header.jsp"/>
 	<div class="ad_uslist_wrapper">
 		<h2>USER LIST</h2>
 		

@@ -10,6 +10,7 @@
   src="https://code.jquery.com/jquery-3.6.1.js"
   integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
   crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 <link href="./css/font.css" rel="stylesheet" type="text/css">
 <link href="./css/temple.css" rel="stylesheet" type="text/css">
@@ -17,11 +18,32 @@
 
 <!-- 제이쿼리로 API 호출하기 위한 기본 스크립트 공식 홈피 참고 -->
      <script type="text/javascript">
-  
+
+   //  localStorage.setItem("key", "${key}");
   // 검색 버튼 누르면 호출 하도록 함수 안에 ajax 진행(호출 기능)
+  
+  
+  
+  	localStorage.setItem("key", "${key}");
+  
+  	var searchKey = localStorage.getItem("key");
+  	
+  	
 
+  
+    	  window.onbeforeunload = () => {
+    		  localStorage.removeItem("key");
+    		  searchKey = null;
+    	  }
+    	  
 
+    	  
+    	  
+   
+  
   function search() {
+	  
+	  
 	  $.ajax({
 		   // 통신 방식
 		     method: "GET",
@@ -35,7 +57,8 @@
 		     
 		   
 		    // API 권한 받기 위한 인증키 
-		     headers: {Authorization: ""},
+		    
+		     headers: {Authorization: searchKey},
 		     
 		  
 		   })

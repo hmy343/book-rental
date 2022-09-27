@@ -32,6 +32,31 @@ public class UserDTO {
 		this.usId = usId;
 		this.usGrade = usGrade;
 	}
+
+
+	public UserDTO(String usId, String usPw, String usEmail, String usPhnum, Date usBirtyDay) {
+		super();
+		this.usId = usId;
+		this.usPw = usPw;
+		this.usEmail = usEmail;
+		this.usPhnum = usPhnum;
+		this.usBirtyDay = usBirtyDay;
+		this.usEmailAgree = 0;
+	}
+
+
+	public UserDTO(String usId, String usPw, String usEmail, String usPhnum, Date usBirtyDay, int usEmailAgree) {
+		super();
+		this.usId = usId;
+		this.usPw = usPw;
+		this.usEmail = usEmail;
+		this.usPhnum = usPhnum;
+		this.usEmailAgree = usEmailAgree;
+		this.usBirtyDay = usBirtyDay;
+	}
+	
+	
+
 	
 	
 }

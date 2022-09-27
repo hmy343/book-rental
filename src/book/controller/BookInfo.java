@@ -7,35 +7,58 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.HTTP;
+import org.json.JSONObject;
 
-@WebServlet("/bookimfo")
+
+@WebServlet("/bookinfo")
 public class BookInfo extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		resp.setContentType("application/json; charset=UTF-8");
+		
+		
+		// jsp -> server Axios로 데이터 전달한 것을 받는 로직
+//		HTTP.toJSONObject(arg0);
+//		req.getParameter(name);
 		
 		//책 상세 정보 받음
-		String bkTumbnail = req.getParameter("bkTumbnail");
-		String bkTitle = req.getParameter("bkTitle");
-		String bkAuthor = req.getParameter("bkAuthor");
-		String bkPublisher = req.getParameter("bkPublisher");
+		String bkTumbnail = req.getParameter("bkTumbnail");			
+		String bkTitle = req.getParameter("bkTitle"); 
+		String bkAuthor =  req.getParameter("bkAuthor"); 
+		String bkPublisher =req.getParameter("bkPublisher"); 
 		String bkDatetime = req.getParameter("bkDatetime");
-		String bkContents = req.getParameter("bkContents");
+		String bkContents = req.getParameter("bkContents"); 
 		String bkUrl = req.getParameter("bkUrl");
 		String bkIsbn = req.getParameter("bkIsbn");
+		 
 		
-		System.out.println(bkTitle);
-		System.out.println(bkAuthor);
-		System.out.println(bkPublisher);
-		System.out.println(bkDatetime);
-		System.out.println(bkIsbn);
-		System.out.println(bkContents);
-		System.out.println(bkUrl);
-		System.out.println(bkTumbnail);
+		  System.out.println(bkTumbnail);
+		  System.out.println(bkTitle); 
+		  System.out.println(bkAuthor);
+		  System.out.println(bkPublisher); 
+		  System.out.println(bkDatetime);
+		  System.out.println(bkIsbn); 
+		  System.out.println(bkContents);
+		  System.out.println(bkUrl);
+		 
+		
+		  
+		  
+		  
+		  
+		  
+//		  String input2=req.getParameter("authors");
+		  
+		  
+//		  System.out.println(input2);
+		
 		
 		// 임시 페이지 이동
-	      req.getRequestDispatcher("main.jsp").forward(req, resp);
-
+		/*
+		 * req.getRequestDispatcher("main.jsp").forward(req, resp);
+		 */
 	}
 
 }

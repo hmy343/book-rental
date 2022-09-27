@@ -41,7 +41,7 @@
        <label for="usId" class="login_group">USERID</label>
        <input type="text" id="id" name="usId"  />
        <label for="usPw">PASSWORD</label>
-       <input type="text" id="pw" name="usPw"  />
+       <input type="password" id="pw" name="usPw"  />
         
         <%-- forgot password : 그냥 넣어봤어요^ㅁ^ --%>
         <label class="sign_us">
@@ -50,7 +50,7 @@
         </label>
         
         <%-- 로그인 버튼 --%>
-        <button type="submit">Log IN</button>
+        <button type="submit" >Log IN</button>
    </form>
 </body>
 </html>

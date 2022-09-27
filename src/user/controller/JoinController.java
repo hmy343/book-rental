@@ -1,6 +1,9 @@
 package user.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
 
+import user.dto.UserDTO;
+import user.model.UserService;
+
+
 @WebServlet("/joinus")
-public class JoinUs extends HttpServlet {
+public class JoinController extends HttpServlet {
+	private UserService service = UserService.getInstance();
+	
    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       req.setCharacterEncoding("utf-8");
       
@@ -19,21 +28,28 @@ public class JoinUs extends HttpServlet {
       String usId = req.getParameter("newUsId");
       String usPw = req.getParameter("newUsPw");
       
-      String usBirthday = req.getParameter("get_birth_year") +  req.getParameter("get_birth_month") +  req.getParameter("get_birth_day");
+      // sql.Date 형식은 yyyy-mm-dd 형으로 들어가야함
+      String usBirthday = req.getParameter("get_birth_year") +"-"+  req.getParameter("get_birth_month") +"-"+  req.getParameter("get_birth_day");
       String usPhnum = req.getParameter("usPhnum1") + req.getParameter("usPhnum2") + req.getParameter("usPhnum3");
-      
       String usEmail = req.getParameter("usEmail1") + req.getParameter("usPhnum2");
-      String usEmailAgree  = req.getParameter("usEmailAgree");
       
+      UserDTO joinUser;
       
+      // 이메일 수신 여부에 따라 객체 생성을 다르게 하기
+      if(req.getParameter("usEmailAgree").equals("on")) {
+    	  joinUser = new UserDTO(usId, usPw, usEmail, usPhnum, Date.valueOf(usBirthday), 1);
+      } else {
+    	  joinUser = new UserDTO(usId, usPw, usEmail, usPhnum, Date.valueOf(usBirthday));
+      }
       
-      System.out.println(usId + " " + usPw);
-      System.out.println(usBirthday);
-      System.out.println(usPhnum);
-      System.out.println(usEmail);
-      System.out.println(usEmailAgree);
+      try {
+		if(service.joinUser(joinUser)) {
+			resp.sendRedirect("login.jsp");			
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
       
-      resp.sendRedirect("main.jsp");      
    }
 
 }

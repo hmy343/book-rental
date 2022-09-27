@@ -28,19 +28,11 @@
   
   	var searchKey = localStorage.getItem("key");
   	
-  	
-
-  
     	  window.onbeforeunload = () => {
     		  localStorage.removeItem("key");
     		  searchKey = null;
     	  }
     	  
-
-    	  
-    	  
-   
-  
   function search() {
 	  
 	  
@@ -191,6 +183,7 @@
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span id="title8" class="tm-text-gray-light"></span>
+                    
                     
                 </div>
             </div>                     

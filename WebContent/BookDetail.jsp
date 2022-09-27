@@ -17,8 +17,8 @@
 <body>
 <jsp:include page="header.jsp"/>
 	<!-- 폼태그를 이용해 대여하기 버튼으로 컨트롤로 전달 -->	
-	
-	<form id="" action="bookinfo" method="get" >
+
+	<div id="bookDetailInfo" action="bookinfo" method="get" >
 		<div id=list0 class="tumbnail"></div>
 		<div id=list1 class="card-title">제목:</div>	
 		<div id=list2 class="card-author">저자 : </div>	
@@ -33,7 +33,7 @@
 		<br>
 		
 		<button type="submit">대여하기</button>
-	</form>
+	</div>
 	
 	<script type="text/javascript">
     //main 페이지에서 사진을 클릭시 전달한 제목을 파라미터로 저장
@@ -75,9 +75,13 @@
 			document.getElementById("list5").innerHTML = bookDetailData.contents + "<input name=\"bkContents\" style=\"display: none\" value= \" " + bookDetailData.contents +"\">";
 			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"'>MoreView</a>" + "<input name=\"bkUrl\" style=\"display: none\" value= \" " + bookDetailData.url +"\">"
 			+ "<input name=\"bkIsbn\" style=\"display: none\" value= \" " + bookDetailData.isbn +"\">";
+
+			const bookDetailInfo = documenet.getElementById('bookDetailInfo');
+			bookDetailInfo.addEventListner('click', handleClick());
 			
-			
-			
+			const handleClick = () => {
+				
+			}
   </script>	
 </body>
 </html>

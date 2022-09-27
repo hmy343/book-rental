@@ -1,6 +1,9 @@
 package user.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
 
+import user.dto.UserDTO;
+import user.model.UserService;
+
+
 @WebServlet("/joinus")
-public class JoinUs extends HttpServlet {
+public class JoinController extends HttpServlet {
+	private UserService service = UserService.getInstance();
+	
    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       req.setCharacterEncoding("utf-8");
       
@@ -19,12 +28,11 @@ public class JoinUs extends HttpServlet {
       String usId = req.getParameter("newUsId");
       String usPw = req.getParameter("newUsPw");
       
-      String usBirthday = req.getParameter("get_birth_year") +  req.getParameter("get_birth_month") +  req.getParameter("get_birth_day");
+      String usBirthday = req.getParameter("get_birth_year") +"-"+  req.getParameter("get_birth_month") +"-"+  req.getParameter("get_birth_day");
       String usPhnum = req.getParameter("usPhnum1") + req.getParameter("usPhnum2") + req.getParameter("usPhnum3");
       
       String usEmail = req.getParameter("usEmail1") + req.getParameter("usPhnum2");
       String usEmailAgree  = req.getParameter("usEmailAgree");
-      
       
       
       System.out.println(usId + " " + usPw);
@@ -33,7 +41,20 @@ public class JoinUs extends HttpServlet {
       System.out.println(usEmail);
       System.out.println(usEmailAgree);
       
-      resp.sendRedirect("main.jsp");      
+//      UserDAO.joinUser();
+//      UserDTO joinUser = service.joinUser(usId, usPw, usPhnum, usEmail, usBirthday);
+//      UserDTO joinUser = service.joinUser();
+      UserDTO joinUser = new UserDTO(usId, usPw, usEmail, usPhnum, Date.valueOf(usBirthday));
+      System.out.println(joinUser);
+      
+      try {
+		service.joinUser(joinUser);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+      
+      resp.sendRedirect("login.jsp");      
    }
 
 }

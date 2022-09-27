@@ -17,4 +17,9 @@ public class UserService {
 	public UserDTO loginCheck(String usId, String usPw) throws SQLException {
 		return UserDAO.loginCheck(usId, usPw);
 	}
+	
+	public boolean joinUser(UserDTO UserDTO) throws SQLException {
+		return UserDAO.joinUser(UserDTO);
+	}
+	
 }

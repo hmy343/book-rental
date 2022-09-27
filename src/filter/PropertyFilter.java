@@ -59,7 +59,7 @@ public class PropertyFilter implements Filter {
 	    
 	    try {
 
-	        input = new FileInputStream("C:\\dev\\miniProjectBook\\WebContent\\META-INF\\config.properties");
+	        input = new FileInputStream("C:\\dev\\07.ServletJSP\\bookrental\\WebContent\\META-INF\\config.properties");
 
 	        // load a properties file
 	        prop.load(input);

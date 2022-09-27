@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import org.json.HTTP;
+import org.json.HTTP;
+import org.json.JSONObject;
 
 
 @WebServlet("/bookinfo")
@@ -15,6 +16,8 @@ public class BookInfo extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		resp.setContentType("application/json; charset=UTF-8");
+		
 		
 		// jsp -> server Axios로 데이터 전달한 것을 받는 로직
 //		HTTP.toJSONObject(arg0);
@@ -41,8 +44,15 @@ public class BookInfo extends HttpServlet {
 		  System.out.println(bkUrl);
 		 
 		
-		
-	
+		  
+		  
+		  
+		  
+		  
+//		  String input2=req.getParameter("authors");
+		  
+		  
+//		  System.out.println(input2);
 		
 		
 		// 임시 페이지 이동

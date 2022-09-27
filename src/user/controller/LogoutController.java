@@ -21,7 +21,7 @@ public class LogoutController extends HttpServlet {
 		if (loginGrade.equals("AD")) {
 			res.sendRedirect("main.jsp");
 		} else {
-			res.sendRedirect(req.getHeader("Referer"));
+//			res.sendRedirect(req.getHeader("Referer"));
 		}
 	}
 

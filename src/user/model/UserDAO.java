@@ -9,13 +9,8 @@ import user.dto.UserDTO;
 import util.DBUtil;
 
 public class UserDAO {
-private static UserDAO instance = new UserDAO();
-	
-	public static UserDAO getInstance() {
-		return instance;
-	}
-	
-	public static UserDTO loginCheck() throws SQLException {
+	// 입력 id, pw가 db에 있는지 확인
+	public static UserDTO loginCheck(String usId, String usPw) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -26,6 +21,8 @@ private static UserDAO instance = new UserDAO();
 		try {			
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, usId);
+			pstmt.setString(2, usPw);			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -35,6 +32,34 @@ private static UserDAO instance = new UserDAO();
 			DBUtil.close(con, pstmt);
 		}
 		return loginUser;
+	}
+	
+	public static boolean joinUser(UserDTO UserDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		String query = "INSERT INTO TB_USERS(US_ID, US_PW, US_EMAIL, US_PHNUM, US_BIRTHDAY) VALUES(?,?,?,?,?)";
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1, UserDTO.getUsId());
+			pstmt.setString(2, UserDTO.getUsPw());
+			pstmt.setString(3, UserDTO.getUsEmail());
+			pstmt.setString(4, UserDTO.getUsPhnum());
+			pstmt.setDate(5, UserDTO.getUsBirtyDay());
+			// default 값은 없어도 됨
+			int result = pstmt.executeUpdate();
+			
+			if(result != 0) {
+				return true;
+			}
+
+		} finally {
+			DBUtil.close(con, pstmt);
+		}
+		return false;
 	}
 
 }

@@ -10,13 +10,12 @@
 
 <title>Insert title here</title>
 </head>
-<!-- 수정 예정 아래의 id값 임시로 바로 로그인 값 받은 거지만 추후 에 DB의 회원정보와 비교 한 결과를 받아야 완벽 -->
-<!-- 수정 예정 아래의 id값 임시로 바로 로그인 값 받은 거지만 추후 에 DB의 회원정보와 비교 한 결과를 받아야 완벽 -->
-<!-- 수정 예정 아래의 id값 임시로 바로 로그인 값 받은 거지만 추후 에 DB의 회원정보와 비교 한 결과를 받아야 완벽 -->
-<% String id = (String)request.getAttribute("usId"); %>
+<% 
+	String id = (String)session.getAttribute("usId");
+%>
 <body>
 
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" style="background-color:#fff;">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.jsp">
                 <i class="fas fa-film mr-2"></i>
@@ -35,10 +34,10 @@
 	                </li>
             	<% } else { %>
 	                <li class="nav-item">
-	                    <a class="nav-link nav-link-3" href=""><%= id %> 님 환영합니다(추후 수정)</a>
+	                    <a class="nav-link nav-link-3" href=""><%= id %> 님 환영합니다</a>
 	                </li>
 	                <li class="nav-item">
-	                    <a class="nav-link nav-link-4" href="login.jsp" onclick="<%id = null; %>">LOGOUT</a>
+	                    <a class="nav-link nav-link-4" href="./logout" onclick="<%id = null; %>">LOGOUT</a>
 	                </li>
 	             <% }%>
             </ul>

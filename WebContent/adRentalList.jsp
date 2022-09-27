@@ -22,7 +22,6 @@
 		
 		<div class="ad_rental_list">
 			<h2>RENTAL LIST</h2>
-			
 			<section>
 				<div>
 					<button>연체조회</button>

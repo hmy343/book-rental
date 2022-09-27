@@ -10,10 +10,7 @@
 <link rel="stylesheet" href="./dashboard.css">
 
 <style type="text/css">
-.phone_content {
-  display: flex;
-  justify-content: space-between;
-}
+.phone_content {display: flex; justify-content: space-between;}
 </style>
 </head>
 <body class="bg-light">
@@ -104,11 +101,44 @@
 			</form>
 		</main>
 	</div>
-   
-
+  
    
    <!-- 생년월일 셀렉트 태그 데이터 생성 로직  -->
    <script type="text/javascript">
+   function checkValid() {
+	    var f = window.document.writeForm;
+			
+		if ( f.newUsId.value == "") {
+		    alert( "아이디를 입력해 주세요" );
+			return false;
+	    }
+		if ( f.newUsPw.value == "" ) {
+			alert( "비밀번호를 입력해 주세요" );
+			return false;
+		}
+		if ( f.newUsPw.value != f.newUsPw2.value ) {
+			alert( "비밀번호가 같지 않습니다." );
+			return false;
+		}
+		if ( f.usPhnum2.value == "" ) {
+	        alert( "전화번호를 입력해 주세요" );
+	        return false;
+	    }
+		if ( f.usPhnum3.value == "" ) {
+	        alert( "전화번호를 입력해 주세요" );
+	        return false;
+	    }
+		if ( f.usEmail1.value == "" ) {
+			alert( "이메일을 입력해 주세요" );
+			return false;
+		}
+		if ( f.usEmail2.value == "" ) {
+			alert( "이메일을 입력해 주세요" );
+			return false;
+		}
+	    return true;
+	}
+   
       // birth_year
       let birth_year = document.getElementById("birth_year");
         for(let i = 1970; i < new Date( ).getFullYear( ) +1; i++) {
@@ -133,7 +163,7 @@
             } else {
                birth_day.innerHTML += "<option value='"+ i +"'>" + i + "</option>";
               }
-        }
+        } 
         
    </script>
    

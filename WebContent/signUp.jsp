@@ -5,18 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Sign Up</title>
+
 </head>
 <body>
    <jsp:include page="header.jsp"/>
    
    <h2>회원가입</h2>
    
-   <form action="joinus" method="post">
+   <form name="writeForm" action="joinus" method="post" onSubmit='return checkValid()'>
       아이디: <input type="text" name="newUsId"/>
       <br/>
       비밀번호: <input type="password" name="newUsPw" />
       <br/>
-      비밀번호 확인: <input type="password" />
+      비밀번호 확인: <input type="password" name="newUsPw2" />
       <br/>
       생년월일 :  
        <select name="get_birth_year" id="birth_year"></select> 년
@@ -53,6 +54,40 @@
    
    <!-- 생년월일 셀렉트 태그 데이터 생성 로직  -->
    <script type="text/javascript">
+   function checkValid() {
+	    var f = window.document.writeForm;
+			
+		if ( f.newUsId.value == "") {
+		    alert( "아이디를 입력해 주세요" );
+			return false;
+	    }
+		if ( f.newUsPw.value == "" ) {
+			alert( "비밀번호를 입력해 주세요" );
+			return false;
+		}
+		if ( f.newUsPw.value != f.newUsPw2.value ) {
+			alert( "비밀번호가 같지 않습니다." );
+			return false;
+		}
+		if ( f.usPhnum2.value == "" ) {
+	        alert( "전화번호를 입력해 주세요" );
+	        return false;
+	    }
+		if ( f.usPhnum3.value == "" ) {
+	        alert( "전화번호를 입력해 주세요" );
+	        return false;
+	    }
+		if ( f.usEmail1.value == "" ) {
+			alert( "이메일을 입력해 주세요" );
+			return false;
+		}
+		if ( f.usEmail2.value == "" ) {
+			alert( "이메일을 입력해 주세요" );
+			return false;
+		}
+	    return true;
+	}
+   
       // birth_year
       let birth_year = document.getElementById("birth_year");
         for(let i = 1970; i < new Date( ).getFullYear( ) +1; i++) {
@@ -77,7 +112,7 @@
             } else {
                birth_day.innerHTML += "<option value='"+ i +"'>" + i + "</option>";
               }
-        }
+        } 
         
    </script>
 </body>

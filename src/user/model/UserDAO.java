@@ -9,13 +9,8 @@ import user.dto.UserDTO;
 import util.DBUtil;
 
 public class UserDAO {
-private static UserDAO instance = new UserDAO();
-	
-	public static UserDAO getInstance() {
-		return instance;
-	}
-	
-	public static UserDTO loginCheck() throws SQLException {
+	// 입력 id, pw가 db에 있는지 확인
+	public static UserDTO loginCheck(String usId, String usPw) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -26,6 +21,8 @@ private static UserDAO instance = new UserDAO();
 		try {			
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, usId);
+			pstmt.setString(2, usPw);			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {

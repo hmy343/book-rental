@@ -42,7 +42,7 @@ public class UserDTO {
 		this.usPhnum = usPhnum;
 		this.usBirtyDay = usBirtyDay;
 	}
-
+	
 	
 	
 }

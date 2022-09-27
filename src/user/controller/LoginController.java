@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 			String usId = req.getParameter("usId");
 			String usPw = req.getParameter("usPw");
 			UserDTO loginUser = service.loginCheck(usId, usPw);
-			
+
 			// 로그인한 사용자 정보를 세션에 저장하기 위한 세션 객체 생성
 			HttpSession loginSession = req.getSession();
 			loginSession.setAttribute("usId", usId);
@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
 			
 			// 로그인한 사용자 정보가 관리자인지 일반 사용자인지에 따라 다른 요청
 			if ("AD".equals(loginUser.getUsGrade())) {
-				req.getRequestDispatcher("adUserList.jsp").forward(req, res);
+				req.getRequestDispatcher("./user-list").forward(req, res);
 			} else {
 //				res.sendRedirect(req.getHeader("Referer"));
 				req.getRequestDispatcher("main.jsp").forward(req, res);

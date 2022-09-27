@@ -54,7 +54,7 @@ public class JoinController extends HttpServlet {
 		e.printStackTrace();
 	}
       
-      resp.sendRedirect("main.jsp");      
+      resp.sendRedirect("login.jsp");      
    }
 
 }

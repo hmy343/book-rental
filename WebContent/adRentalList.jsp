@@ -68,8 +68,8 @@
         <h3>대여현황</h3>
         <hr>
         <div class="rental-status">
-          대여 현황 <br>
-          총 대여 권수 | 연체 권수
+        	<h3>대여 현황</h3>
+        	<p>총 대여 권수 | 연체 권수</p>
         </div>
       </div>
       <div>

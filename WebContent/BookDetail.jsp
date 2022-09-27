@@ -65,7 +65,7 @@
 	         	 bookDetailData = msg.documents[0];
 			
 	       })
-	       console.log(bookDetailData);
+	      
 		     
 			document.getElementById("list0").innerHTML = "<img src='" + bookDetailData.thumbnail+"'/>" + "<input name=\"bkTumbnail\" style=\"display: none\" value= \" " + bookDetailData.thumbnail +"\">"
 			document.getElementById("list1").innerHTML = bookDetailData.title + "<input name=\"bkTitle\" style=\"display: none\" value= \" " + bookDetailData.title +"\">" ;
@@ -76,12 +76,14 @@
 			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"'>MoreView</a>" + "<input name=\"bkUrl\" style=\"display: none\" value= \" " + bookDetailData.url +"\">"
 			+ "<input name=\"bkIsbn\" style=\"display: none\" value= \" " + bookDetailData.isbn +"\">";
 
-			const bookDetailInfo = documenet.getElementById('bookDetailInfo');
-			bookDetailInfo.addEventListner('click', handleClick());
 			
-			const handleClick = () => {
-				
-			}
+		
+
+			
+			
+			
+			
+			
   </script>	
 </body>
 </html>

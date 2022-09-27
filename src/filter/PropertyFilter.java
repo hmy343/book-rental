@@ -16,7 +16,7 @@ import javax.servlet.annotation.WebFilter;
 /**
  * Servlet Filter implementation class PropertyFilter
  */
-@WebFilter(filterName="/PropertyFilter", urlPatterns={"/main.jsp" , "/BookDetail.jsp" , "/check", "/bookinfo", "/login"})
+@WebFilter(filterName="/PropertyFilter", urlPatterns={"/main.jsp" , "/BookDetail.jsp" , "/check", "/adUserList.jsp", "/bookinfo"})
 public class PropertyFilter implements Filter {
 		String key;
     /**

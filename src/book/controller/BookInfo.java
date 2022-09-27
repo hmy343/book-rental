@@ -7,12 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.HTTP;
+
 
 @WebServlet("/bookinfo")
 public class BookInfo extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		
+		// jsp -> server Axios로 데이터 전달한 것을 받는 로직
+//		HTTP.toJSONObject(arg0);
+//		req.getParameter(name);
 		
 		//책 상세 정보 받음
 		String bkTumbnail = req.getParameter("bkTumbnail");			

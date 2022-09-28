@@ -16,6 +16,9 @@
 <link rel="stylesheet" href="./css/dashboard.css">
 <link href="./css/font.css" rel="stylesheet" type="text/css">
 </head>
+<% 
+	String id = (String)session.getAttribute("usId");
+%>
 <body>
 	<!-- Navbar -->
 	<nav

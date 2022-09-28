@@ -24,12 +24,10 @@
 		<div id=list2 class="card-author">저자 : </div>	
 		<div id=list3 class="card-publisher">출판사 : </div>	
 		<div id=list4 class="card-datetime">출판일: </div>
-		
 		<br>
 		<div>상세정보</div>	
 		<div id=list5 class="card-contents"></div>
-		<div id=list6 class="card-url" style= "border: 1px solid black; width: 80px">상세 페이지</div>		
-				
+		<div id=list6 class="card-url" style= "border: 1px solid black; width: 80px">상세 페이지</div>				
 		<br>
 		
 		<button type="submit">대여하기</button>
@@ -43,12 +41,12 @@
   	
   	var bookDetailData = null;
 	// 받아온 타이틀로 재호출
-	   $.ajax({
+		  $.ajax({
 		   // 통신 방식
 		     method: "post",
 		     
 		   //API 주소
-		     url: "https://dapi.kakao.com/v3/search/book?target=title",
+		     url: "https://dapi.kakao.com/v3/search/book?",
 		           
 		   //위에서 쿼리 스트링을 저장한  keyword 변수를 이용해 쿼리 문 작성
 		     data: { query : "<%=keyword%>"},
@@ -67,19 +65,32 @@
 	       })
 	      
 		     
-			document.getElementById("list0").innerHTML = "<img src='" + bookDetailData.thumbnail+"'/>" + "<input name=\"bkTumbnail\" style=\"display: none\" value= \" " + bookDetailData.thumbnail +"\">"
-			document.getElementById("list1").innerHTML = bookDetailData.title + "<input name=\"bkTitle\" style=\"display: none\" value= \" " + bookDetailData.title +"\">" ;
-			document.getElementById("list2").innerHTML = bookDetailData.authors + "<input name=\"bkAuthor\" style=\"display: none\" value= \" " + bookDetailData.authors +"\">";
-			document.getElementById("list3").innerHTML = bookDetailData.publisher + "<input name=\"bkPublisher\" style=\"display: none\" value= \" " + bookDetailData.publisher +"\">";
-			document.getElementById("list4").innerHTML = bookDetailData.datetime + "<input name=\"bkDatetime\" style=\"display: none\" value= \" " + bookDetailData.datetime +"\">";
-			document.getElementById("list5").innerHTML = bookDetailData.contents + "<input name=\"bkContents\" style=\"display: none\" value= \" " + bookDetailData.contents +"\">";
-			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"'>MoreView</a>" + "<input name=\"bkUrl\" style=\"display: none\" value= \" " + bookDetailData.url +"\">"
-			+ "<input name=\"bkIsbn\" style=\"display: none\" value= \" " + bookDetailData.isbn +"\">";
-
+			document.getElementById("list0").innerHTML = "<img src='" + bookDetailData.thumbnail+"'/>";
+			document.getElementById("list1").innerHTML = bookDetailData.title ;
+			document.getElementById("list2").innerHTML = bookDetailData.authors;
+			document.getElementById("list3").innerHTML = bookDetailData.publisher;
+			document.getElementById("list4").innerHTML = bookDetailData.datetime;
+			document.getElementById("list5").innerHTML = bookDetailData.contents;
+			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"'>MoreView</a>";
 			
-		
-
-			
+ 			const authorsArr = bookDetailData.authors;
+ 			const sendAuthors = authorsArr.join([","]);
+ 			console.log(sendAuthors);
+			const sendData = {'data' :
+									{'thumbnail' : bookDetailData.thumbnail ,
+										'title' : bookDetailData.title,
+										'isbn' : bookDetailData.isbn,
+										'url' : bookDetailData.url,
+										'contents' : bookDetailData.contents,
+										'datetime' : bookDetailData.datetime,
+										'publisher' : bookDetailData.publisher,
+										'authors' : sendAuthors
+									}
+										
+							  };
+			axios.get("http://localhost:8086/bookRental/bookinfo"
+					,{params: sendData}
+			).then(res => console.log(res));
 			
 			
 			

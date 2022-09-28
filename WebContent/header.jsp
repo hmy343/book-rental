@@ -17,7 +17,7 @@
 
     <nav class="navbar navbar-expand-lg" style="background-color:#fff;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="main.jsp">
+            <a class="navbar-brand" href="./main.do">
                 <i class="fas fa-film mr-2"></i>
                 Book Rental
             </a>
@@ -34,7 +34,7 @@
 	                </li>
             	<% } else { %>
 	                <li class="nav-item">
-	                    <a class="nav-link nav-link-3" href=""><%= id %> 님 환영합니다</a>
+	                    <a class="nav-link nav-link-3" href=""><%= id %>님</a>
 	                </li>
 	                <li class="nav-item">
 	                    <a class="nav-link nav-link-4" href="./logout" onclick="<%id = null; %>">LOGOUT</a>

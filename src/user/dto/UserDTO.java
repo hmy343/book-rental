@@ -2,6 +2,7 @@ package user.dto;
 
 import java.sql.Date;
 
+import enumtype.UsGradeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class UserDTO {
@@ -30,7 +31,7 @@ public class UserDTO {
 	public UserDTO(String usId, String usGrade) {
 		super();
 		this.usId = usId;
-		this.usGrade = usGrade;
+		this.usGrade = UsGradeEnum.valueOf(usGrade).getGrade();
 	}
 
 
@@ -54,9 +55,26 @@ public class UserDTO {
 		this.usEmailAgree = usEmailAgree;
 		this.usBirtyDay = usBirtyDay;
 	}
-	
-	
 
+
+	public UserDTO(String usId, String usPw, String usEmail, String usPhnum, String usGrade, int usOverdue,
+			Date usJoinDate, int usEmailAgree, Date usBirtyDay, int usStatus, Date usLastAccess) {
+		super();
+		this.usId = usId;
+		this.usPw = usPw;
+		this.usEmail = usEmail;
+		this.usPhnum = usPhnum;
+		this.usGrade = UsGradeEnum.valueOf(usGrade).getGrade();
+		this.usOverdue = usOverdue;
+		this.usJoinDate = usJoinDate;
+		this.usEmailAgree = usEmailAgree;
+		this.usBirtyDay = usBirtyDay;
+		this.usStatus = usStatus;
+		this.usLastAccess = usLastAccess;
+	}
+	
+	
+	
 	
 	
 }

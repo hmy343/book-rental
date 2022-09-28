@@ -18,18 +18,29 @@ public class UserDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "SELECT US_ID, US_GRADE FROM TB_USERS WHERE US_ID = ? AND US_PW = ?";
+		String selectQuery = "SELECT US_ID, US_GRADE FROM TB_USERS WHERE US_ID = ? AND US_PW = ?";
+		String updateQuery = "UPDATE TB_USERS SET US_ACCESS_DATE = sysdate() WHERE US_ID = ?";
 		UserDTO loginUser = null;
 
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement(query);
+			pstmt = con.prepareStatement(selectQuery);
 			pstmt.setString(1, usId);
 			pstmt.setString(2, usPw);
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
 				loginUser = new UserDTO(rset.getString("US_ID"), rset.getString("US_GRADE"));
+			}
+			
+			// 로그인 정보가 존재하면 해당 user의 접속기록 업데이트
+			if(loginUser != null) {
+				pstmt = con.prepareStatement(updateQuery);
+				pstmt.setString(1, usId);
+				int result = pstmt.executeUpdate();
+				if (result == 0) {
+					return loginUser;
+				}
 			}
 		} finally {
 			DBUtil.close(con, pstmt);
@@ -93,26 +104,28 @@ public class UserDAO {
 		return alist;
 	}
 	
-	public static String idCheck(String usId) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String result = "";
-		
-		String query = "SELECT US_ID FROM TB_USERS WHERE US_ID = ?";
-		
-		try {			
-			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, usId);
-			while(rset.next()) {
-				result = rset.getString(1);
-			}
-		} finally {
-			DBUtil.close(con, pstmt);
-		}
-		
-		return result;
-	}
+	// id가 존재하는지 체크
+//	public static String idCheck(String usId) throws SQLException {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		String result = "";
+//		
+//		String query = "SELECT US_ID FROM TB_USERS WHERE US_ID = ?";
+//		
+//		try {			
+//			con = DBUtil.getConnection();
+//			pstmt = con.prepareStatement(query);
+//			pstmt.setString(1, usId);
+//			rset = pstmt.executeQuery();
+//			if(rset.next()) {
+//				result = rset.getString(1);
+//			}
+//		} finally {
+//			DBUtil.close(con, pstmt);
+//		}
+//		
+//		return result;
+//	}
 
 }

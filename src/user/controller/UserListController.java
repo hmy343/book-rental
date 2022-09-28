@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import user.dto.UserDTO;
 import user.model.UserService;
 
-@WebServlet("/user-list")
+@WebServlet("/admin-user")
 public class UserListController extends HttpServlet {
 	private UserService service = UserService.getInstance();
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +26,6 @@ public class UserListController extends HttpServlet {
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-				req.setAttribute("error", "유저 리스트 보기 실패 재 실행 해 주세요");
 			}
 	}
 

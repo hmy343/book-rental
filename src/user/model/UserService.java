@@ -23,26 +23,30 @@ public class UserService {
 
 	// 로그인
 	public UserDTO loginCheck(String usId, String usPw) throws SQLException {
+//		UserDTO user = UserDAO.loginCheck(usId, usPw);
+//		if (user != ) {
+//			return user;
+//		}
 		return UserDAO.loginCheck(usId, usPw);
 	}
 	
 	// 회원가입
 	public boolean joinUser(UserDTO UserDTO) throws SQLException, ExistUserException {
 		// 해당 아이디가 존재하는지 확인
-		idCheck(UserDTO.getUsId());
 		return UserDAO.joinUser(UserDTO);
 	}
 	
+	// 전체 회원 검색
 	public ArrayList<UserDTO> getAllUser() throws SQLException{
 		return UserDAO.getAllUser();
 	}
 	
 	// id 존재 여부 확인
-	public void idCheck(String usId) throws ExistUserException, SQLException {
-		String checkId = UserDAO.idCheck(usId);
-		if(checkId != null) {
-			throw new ExistUserException();
-		}
-	}
+//	public void idCheck(String usId) throws ExistUserException, SQLException {
+//		String checkId = UserDAO.idCheck(usId);
+//		if(checkId != null) {
+//			throw new ExistUserException();
+//		}
+//	}
 	
 }

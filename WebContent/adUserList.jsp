@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="./css/dashboard.css">
 <link href="./css/font.css" rel="stylesheet" type="text/css">
 </head>
+<% 
+	String id = (String)session.getAttribute("usId");
+%>
 <body>
 	<!-- Navbar -->
   <nav class="navbar navbar-dark bg-primary fixed-top flex-md-nowrap p-0 shadow">
@@ -19,10 +22,10 @@
       </a>
       
       
-      <ul class="nav d-flex">
-        <li class="nav-item nav-link-3 text-nowrap">UserID</li>
-        <li class="nav-item nav-link-4 text-nowrap" href="login.jsp" onclick="">LogOut</li>
-      </ul>
+      <div class="row">
+        <div class="col" onclick="<%id = null; %>"><a href="login.jsp" class="logout_link" style="color:#fff; text-decoration: none;">LOGOUT</a></li>
+      </div>
+      
     </div>
   </nav>
 	

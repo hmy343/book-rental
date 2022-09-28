@@ -12,6 +12,9 @@
 <style type="text/css">
 .phone_content {display: flex; justify-content: space-between;}
 </style>
+<script type="text/javascript">
+	request.getAtt
+</script>
 </head>
 <body class="bg-light">
    <jsp:include page="header.jsp"/>

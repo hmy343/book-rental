@@ -81,57 +81,69 @@ crossorigin="anonymous"></script>
 	</main>
 	
 
-   <script type="text/javascript">
+  <script type="text/javascript">
     //main 페이지에서 사진을 클릭시 전달한 제목을 파라미터로 저장
-   <% String keyword = request.getParameter("title");%>
-   localStorage.setItem("key", "${key}");
-     var searchKey = localStorage.getItem("key");
-     
-     var bookDetailData = null;
-   // 받아온 타이틀로 재호출
-        $.ajax({
-         // 통신 방식
-           method: "post",
-           
-         //API 주소
-           url: "https://dapi.kakao.com/v3/search/book?",
-                 
-         //위에서 쿼리 스트링을 저장한  keyword 변수를 이용해 쿼리 문 작성
-           data: { query : "<%=keyword%>"},
-           
-         // API 권한 받기 위한 인증키 
-           headers: {Authorization: searchKey },
-           
-         //동기로 처리  
-           async: false
-         })
-         
-         // 호출 완료 시 해당 책이름이 포함되니 모든 데이터가 msg 매게 변수로 JSON 타입의 배열객체로 받아짐
-          .done(function( msg ) {
-                bookDetailData = msg.documents[0];
-         
-          })
-         
-           
-         document.getElementById("list0").innerHTML = "<img class='rounded mx-auto d-block' src='" + bookDetailData.thumbnail+"'/>" + "<input name=\"bkTumbnail\" style=\"display: none\" value= \" " + bookDetailData.thumbnail +"\">";
-         document.getElementById("list1").innerHTML = bookDetailData.title + "<input name=\"bkTitle\" style=\"display: none\" value= \" " + bookDetailData.title +"\">" ;
-         document.getElementById("list2").innerHTML = bookDetailData.authors + "<input name=\"bkAuthor\" style=\"display: none\" value= \" " + bookDetailData.authors +"\">";
-         document.getElementById("list3").innerHTML = bookDetailData.publisher + "<input name=\"bkPublisher\" style=\"display: none\" value= \" " + bookDetailData.publisher +"\">";
-         document.getElementById("list4").innerHTML = bookDetailData.datetime + "<input name=\"bkDatetime\" style=\"display: none\" value= \" " + bookDetailData.datetime +"\">";
-         document.getElementById("list5").innerHTML = bookDetailData.contents + "<input name=\"bkContents\" style=\"display: none\" value= \" " + bookDetailData.contents +"\">";
-         document.getElementById("list6").innerHTML ="<a class='btn btn-outline-secondary' role='button' href='" + bookDetailData.url +"'>+more</a>" + "<input name=\"bkUrl\" style=\"display: none\" value= \" " + bookDetailData.url +"\">"
-         + "<input name=\"bkIsbn\" style=\"display: none\" value= \" " + bookDetailData.isbn +"\">";
-
-
-        const sendData =  {'data':{'thumbnail' : bookDetailData.thumbnail ,'title': bookDetailData.title} };
-         
-	
-		axios.get("http://localhost:8080/book-rental/rentalInfo"
-               ,{params: sendData}
-         ).then(res => console.log(res));
-		
-         
-  </script>   
+	<% String keyword = request.getParameter("title");%>
+	localStorage.setItem("key", "${key}");
+  	var searchKey = localStorage.getItem("key");
+  	
+  	var bookDetailData = null;
+	// 받아온 타이틀로 재호출
+		  $.ajax({
+		   // 통신 방식
+		     method: "post",
+		     
+		   //API 주소
+		     url: "https://dapi.kakao.com/v3/search/book?",
+		           
+		   //위에서 쿼리 스트링을 저장한  keyword 변수를 이용해 쿼리 문 작성
+		     data: { query : "<%=keyword%>"},
+		     
+		   // API 권한 받기 위한 인증키 
+		     headers: {Authorization: searchKey },
+		     
+		   //동기로 처리  
+		     async: false
+		   })
+		   
+		   // 호출 완료 시 해당 책이름이 포함되니 모든 데이터가 msg 매게 변수로 JSON 타입의 배열객체로 받아짐
+	       .done(function( msg ) {
+	         	 bookDetailData = msg.documents[0];
+			
+	       })
+	      
+		     
+			document.getElementById("list0").innerHTML = "<img src='" + bookDetailData.thumbnail+"'/>";
+			document.getElementById("list1").innerHTML = bookDetailData.title ;
+			document.getElementById("list2").innerHTML = bookDetailData.authors;
+			document.getElementById("list3").innerHTML = bookDetailData.publisher;
+			document.getElementById("list4").innerHTML = bookDetailData.datetime;
+			document.getElementById("list5").innerHTML = bookDetailData.contents;
+			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"'>MoreView</a>";
+			
+ 			const authorsArr = bookDetailData.authors;
+ 			const sendAuthors = authorsArr.join([","]);
+ 			console.log(sendAuthors);
+			const sendData = {'data' :
+									{'thumbnail' : bookDetailData.thumbnail ,
+										'title' : bookDetailData.title,
+										'isbn' : bookDetailData.isbn,
+										'url' : bookDetailData.url,
+										'contents' : bookDetailData.contents,
+										'datetime' : bookDetailData.datetime,
+										'publisher' : bookDetailData.publisher,
+										'authors' : sendAuthors
+									}
+										
+							  };
+			axios.get("http://localhost:8086/bookRental/bookinfo"
+					,{params: sendData}
+			).then(res => console.log(res));
+			
+			
+			
+			
+  </script>	
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

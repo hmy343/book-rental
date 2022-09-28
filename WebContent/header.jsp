@@ -17,7 +17,7 @@
 
     <nav class="navbar navbar-expand-lg" style="background-color:#fff;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="main.jsp">
+            <a class="navbar-brand" href="./main.do">
                 <i class="fas fa-film mr-2"></i>
                 Book Rental
             </a>

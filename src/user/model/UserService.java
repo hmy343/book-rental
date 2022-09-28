@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import exception.ExistUserException;
+import exception.NotExistException;
 import user.dto.UserDTO;
 
 public class UserService {
@@ -23,10 +23,6 @@ public class UserService {
 
 	// 로그인
 	public UserDTO loginCheck(String usId, String usPw) throws SQLException {
-//		UserDTO user = UserDAO.loginCheck(usId, usPw);
-//		if (user != ) {
-//			return user;
-//		}
 		return UserDAO.loginCheck(usId, usPw);
 	}
 	

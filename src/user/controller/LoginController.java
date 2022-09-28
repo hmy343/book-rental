@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 			String usId = req.getParameter("usId");
 			String usPw = req.getParameter("usPw");
 			UserDTO loginUser = service.loginCheck(usId, usPw);
-
+			
 			// 로그인한 사용자 정보를 세션에 저장하기 위한 세션 객체 생성
 			HttpSession loginSession = req.getSession();
 			loginSession.setAttribute("usId", usId);

@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 
 import user.dto.UserDTO;
 import util.DBUtil;
@@ -21,15 +18,15 @@ public class UserDAO {
 		String selectQuery = "SELECT US_ID, US_GRADE FROM TB_USERS WHERE US_ID = ? AND US_PW = ?";
 		String updateQuery = "UPDATE TB_USERS SET US_ACCESS_DATE = sysdate() WHERE US_ID = ?";
 		UserDTO loginUser = null;
-
-		try {
+		
+		try {			
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(selectQuery);
 			pstmt.setString(1, usId);
-			pstmt.setString(2, usPw);
+			pstmt.setString(2, usPw);			
 			rset = pstmt.executeQuery();
-
-			if (rset.next()) {
+			
+			if(rset.next()) {
 				loginUser = new UserDTO(rset.getString("US_ID"), rset.getString("US_GRADE"));
 			}
 			
@@ -67,8 +64,8 @@ public class UserDAO {
 			pstmt.setInt(6, UserDTO.getUsEmailAgree());
 			// default 값은 없어도 됨
 			int result = pstmt.executeUpdate();
-
-			if (result != 0) {
+			
+			if(result != 0) {
 				return true;
 			}
 

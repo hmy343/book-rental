@@ -3,6 +3,7 @@ package filter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import javax.servlet.Filter;
@@ -31,6 +32,8 @@ public class PropertyFilter implements Filter {
 
 		chain.doFilter(request, response);
 
+		
+		
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

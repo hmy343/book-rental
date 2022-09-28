@@ -42,7 +42,6 @@ public class UserDTO {
 		this.usEmail = usEmail;
 		this.usPhnum = usPhnum;
 		this.usBirtyDay = usBirtyDay;
-		this.usEmailAgree = 0;
 	}
 
 

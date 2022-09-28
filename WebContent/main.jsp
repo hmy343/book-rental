@@ -203,7 +203,7 @@
 			var searchWebParam = {
 					'query' : $("#keyword").val(),
 					'size' : 8,
-					'page' : 1	
+					'page' : 2	
 				};
 			
 			$.ajax({

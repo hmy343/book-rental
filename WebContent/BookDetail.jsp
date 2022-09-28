@@ -10,7 +10,7 @@
 <style>
   .detail_wrapper {margin-top: 60px; margin-bottom: 100px;}
   .k_detail_bg {background-image: url("./img/k_detail_bg.jpg") !important;}
-  .ratio>* {left: 15%;}
+  .ratio>* {left: 15% !important;}
   .tumbnail {background: #ccc; margin-bottom: 20px; }
   .tumbnail img {width: 70%;}
   .card-title {padding-top: 0; font-size: 1.2rem; font-weight: 700;}
@@ -36,7 +36,7 @@ crossorigin="anonymous"></script>
 	      <div class="col-md-5 p-lg-5 mx-auto my-5 bk_detail_bg">
 	        <h1 class="display-4 fw-normal">Book-Rental</h1>
 	        <p class="lead fw-normal">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</p>
-	        <a class="btn btn-outline-secondary" href="#">목록으로 이동</a>
+	        <a class="btn btn-outline-secondary" href="main.jsp">목록으로 이동</a>
 	      </div>
 	    </div>
 	    
@@ -46,7 +46,9 @@ crossorigin="anonymous"></script>
       <div class="row flex-nowrap" id="bookDetailInfo" action="bookinfo" method="get" >
         <div class="col">
           <div id=list0 class="tumbnail ratio ratio-1x1"><img class="rounded mx-auto d-block" src="https://www.cbc.ca/kidsnews/content/_card_resize/BlueMonday_thumbnail.jpg"/></div>
-          <div class="row" style="box-sizing: border-box !important;"><button type="submit" class="btn btn-outline-primary">대여하기</button></div>
+          <div class="row" style="box-sizing: border-box !important;">
+          	<button id="rental_btn" type="submit" class="btn btn-outline-primary">대여하기</button>
+          </div>
         </div>
   
         <div class="col-7 info_content">
@@ -85,9 +87,9 @@ crossorigin="anonymous"></script>
     //main 페이지에서 사진을 클릭시 전달한 제목을 파라미터로 저장
 	<% String keyword = request.getParameter("title");%>
 	localStorage.setItem("key", "${key}");
-  	var searchKey = localStorage.getItem("key");
+  	let searchKey = localStorage.getItem("key");
   	
-  	var bookDetailData = null;
+  	let bookDetailData = null;
 	// 받아온 타이틀로 재호출
 		  $.ajax({
 		   // 통신 방식
@@ -119,28 +121,39 @@ crossorigin="anonymous"></script>
 			document.getElementById("list3").innerHTML = bookDetailData.publisher;
 			document.getElementById("list4").innerHTML = bookDetailData.datetime;
 			document.getElementById("list5").innerHTML = bookDetailData.contents;
-			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"'>MoreView</a>";
-			
- 			const authorsArr = bookDetailData.authors;
- 			const sendAuthors = authorsArr.join([","]);
- 			console.log(sendAuthors);
-			const sendData = {'data' :
-									{'thumbnail' : bookDetailData.thumbnail ,
-										'title' : bookDetailData.title,
-										'isbn' : bookDetailData.isbn,
-										'url' : bookDetailData.url,
-										'contents' : bookDetailData.contents,
-										'datetime' : bookDetailData.datetime,
-										'publisher' : bookDetailData.publisher,
-										'authors' : sendAuthors
-									}
-										
-							  };
-			axios.get("http://localhost:8086/bookRental/bookinfo"
-					,{params: sendData}
-			).then(res => console.log(res));
+			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"' class='btn btn-outline-secondary'>+more</a>";
 			
 			
+			<%-- 대여하기 버튼 DOM --%>
+			const btn = document.getElementById('rental_btn');
+			
+			<%-- 대여하기 버튼 클릭시 비동기 데이터 전송 (->rentalBkInfo) --%>
+			const handleApiData = () => {
+				console.log('click~')
+				
+
+	 			const authorsArr = bookDetailData.authors;
+	 			const sendAuthors = authorsArr.join([","]);
+	 			console.log(sendAuthors);
+				const sendData = {'data' :
+										{'thumbnail' : bookDetailData.thumbnail ,
+											'title' : bookDetailData.title,
+											'isbn' : bookDetailData.isbn,
+											'url' : bookDetailData.url,
+											'contents' : bookDetailData.contents,
+											'datetime' : bookDetailData.datetime,
+											'publisher' : bookDetailData.publisher,
+											'authors' : sendAuthors
+										}
+											
+								  };
+				axios.get("http://localhost:8080/book-rental/bookinfo"
+						,{params: sendData}
+				).then(res => console.log(res));
+				
+			}
+			
+			btn.addEventListener('click', handleApiData);
 			
 			
   </script>	

@@ -28,12 +28,12 @@ public class rentalBkInfo extends HttpServlet {
 		jsonData.put("test", apiData);
 		
 //		String title = jsonData.getString("title");
-		System.out.println(jsonData.getString("title"));
+//		System.out.println(jsonData.getString("title"));
 		
 		PrintWriter out = resp.getWriter();
 		out.print(jsonData.toString());
 		
-		System.out.println(jsonData.toString());
+//		System.out.println(jsonData.toString());
 	}
 
 }

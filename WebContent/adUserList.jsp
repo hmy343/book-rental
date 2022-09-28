@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +9,9 @@
 <link rel="stylesheet" href="./css/dashboard.css">
 <link href="./css/font.css" rel="stylesheet" type="text/css">
 </head>
+<% 
+	String id = (String)session.getAttribute("usId");
+%>
 <body>
 	<!-- Navbar -->
   <nav class="navbar navbar-dark bg-primary fixed-top flex-md-nowrap p-0 shadow">
@@ -22,10 +22,10 @@
       </a>
       
       
-      <ul class="nav d-flex">
-        <li class="nav-item nav-link-3 text-nowrap">UserID</li>
-        <li class="nav-item nav-link-4 text-nowrap" href="login.jsp" onclick="">LogOut</li>
-      </ul>
+      <div class="row">
+        <div class="col" onclick="<%id = null; %>"><a href="login.jsp" class="logout_link" style="color:#fff; text-decoration: none;">LOGOUT</a></li>
+      </div>
+      
     </div>
   </nav>
 	
@@ -102,35 +102,44 @@
               </tr>
             </thead>
             <tbody>
-	            <c:if test="${empty userList || fn:length(userList) == 0}">
-					<tr>
-				        <td colspan="5">
-				            <p align="center"><b><span style="font-size:9pt;">AAAAAAAAAAAAAAAAAAAAAAAAA</span></b></p>
-				        </td>
-				    </tr>
-				</c:if>
-			<c:forEach items="${requestScope.userList}" var="data">				
-	             <tr>
-	                <td scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-	                <td>${data.usId}</td>
-	                <td>${data.usJoinDate}</td>
-	                <td>${data.usBirtyDay}</td>
-	                <td>${data.usPhnum}</td>
-	                <td>${data.usEmail}</td>
-	                <td>${data.usEmailAgree}</td>
-	                <td>${data.usOverdue}</td>
-	                <td>${data.usStatus}</td>
-	                <td>
-	                  <select name="us_grade">
-	                    <option value="" selected>${data.usGrade}</option>
-	                    <option value="bronze">B</option>
-	                    <option value="silver">S</option>
-	                    <option value="gold">G</option>
-	                    <option value="platinum">P</option>
-	                  </select>
-	                </td>
-	              </tr>
-              </c:forEach>
+              <tr>
+                <td scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
+                <td>my8za</td>
+                <td>2022-09-27</td>
+                <td>1997-01-01</td>
+                <td>010-1234-5678</td>
+                <td>email@gmail.com</td>
+                <td>true</td>
+                <td>0</td>
+                <td>1</td>
+                <td>
+                  <select name="us_grade">
+                    <option value="bronze">B</option>
+                    <option value="silver">S</option>
+                    <option value="gold" selected>G</option>
+                    <option value="platinum">P</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled></td>
+                <td>data2</td>
+                <td>2022-09-27</td>
+                <td>1997-01-01</td>
+                <td>010-1234-5678</td>
+                <td>email@gmail.com</td>
+                <td>true</td>
+                <td>0</td>
+                <td>1</td>
+                <td>
+                  <select name="us_grade">
+                    <option>B</option>
+                    <option>S</option>
+                    <option>G</option>
+                    <option>P</option>
+                  </select>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

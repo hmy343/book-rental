@@ -28,6 +28,9 @@
     		  localStorage.removeItem("key");
     		  searchKey = null;
     	  }
+    	  
+    	  
+  
 </script>
 
 </head>
@@ -41,8 +44,8 @@
 		<div class="d-flex tm-search-form">
 			<input class="form-control tm-search-input" type="search"
 				aria-label="Search" id="keyword" placeholder="search">
-			<button class="btn btn-outline-success tm-search-btn" type="submit"
-				onclick="search()">
+			<button class="btn btn-outline-success tm-search-btn" 
+				onclick="search();">
 				<i class="fas fa-search"></i>
 			</button>
 		</div>
@@ -163,11 +166,17 @@
 	</div>
 		
 	<script type="text/javascript">
+	
+
 
 function search() {
 	var bookDataList = null;
 	<% String pageNum = request.getParameter("listPage");%>
-	var searchWebParam = {
+	
+	
+	
+	
+	let searchWebParam = {
 		      'query' : $("#keyword").val(),
 		      'size' : 8,
 		      'page' : 1	
@@ -183,22 +192,19 @@ function search() {
 		     headers: {Authorization: searchKey},
 		     async: false
 		   })
-		     .done(function( msg ) {
-		   
-			 		 
+		     .done(function( msg ) {	 
 			 	bookDataList = msg;
-		    	
-	
 		     })
 		     
 		     for(var i = 0 ; i < 8 ; i++){
-		    	 
-		    	 
 		    	 document.getElementById("title"+ (i+1)).innerHTML= bookDataList.documents[i].title;
 		    	 document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList.documents[i].thumbnail+"' onclick= \" location.href= 'BookDetail.jsp?title="+bookDataList.documents[i].title+"'\"/>";
 			 };
 		     
 		  };
+		  
+		  let searchValue = document.getElementById("keyword").value 
+		    console.log(searchValue);
 		  
 </script>
 

@@ -58,9 +58,7 @@ public class BookInfo extends HttpServlet {
 		// 임시 페이지 이동
 		/*
 		 * req.getRequestDispatcher("main.jsp").forward(req, resp);
-		 */  
-		  		  
-		  		  
+		 */
 	}
 
 }

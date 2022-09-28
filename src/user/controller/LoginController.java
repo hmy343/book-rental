@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import enumtype.UsGrade;
+import enumtype.UsGradeEnum;
 import user.dto.UserDTO;
 import user.model.UserDAO;
 import user.model.UserService;
@@ -35,13 +35,7 @@ public class LoginController extends HttpServlet {
 			loginSession.setAttribute("usId", usId);
 			loginSession.setAttribute("usGrade", loginUser.getUsGrade());
 			
-			// 로그인한 사용자 정보가 관리자인지 일반 사용자인지에 따라 다른 요청
-			if ("AD".equals(loginUser.getUsGrade())) {
-				req.getRequestDispatcher("adUserList.jsp").forward(req, res);
-			} else {
-//				res.sendRedirect(req.getHeader("Referer"));
-				req.getRequestDispatcher("main.jsp").forward(req, res);
-			}
+			res.sendRedirect("./main.do");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

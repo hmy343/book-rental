@@ -105,7 +105,8 @@ public class UserDAO {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, usId);
-			while(rset.next()) {
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
 				result = rset.getString(1);
 			}
 		} finally {

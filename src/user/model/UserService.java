@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import exception.NotExistException;
+import exception.ExistUserException;
 import user.dto.UserDTO;
 
 public class UserService {
@@ -27,8 +27,9 @@ public class UserService {
 	}
 	
 	// 회원가입
-	public boolean joinUser(UserDTO UserDTO) throws SQLException {
+	public boolean joinUser(UserDTO UserDTO) throws SQLException, ExistUserException {
 		// 해당 아이디가 존재하는지 확인
+		idCheck(UserDTO.getUsId());
 		return UserDAO.joinUser(UserDTO);
 	}
 	
@@ -37,9 +38,10 @@ public class UserService {
 	}
 	
 	// id 존재 여부 확인
-	public void idCheck(String usId) throws NotExistException, SQLException {
-		if(UserDAO.idCheck(usId) != null) {
-			throw new NotExistException();
+	public void idCheck(String usId) throws ExistUserException, SQLException {
+		String checkId = UserDAO.idCheck(usId);
+		if(checkId != null) {
+			throw new ExistUserException();
 		}
 	}
 	

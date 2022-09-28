@@ -14,8 +14,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(filterName = "/PropertyFilter", urlPatterns = { "/main.do", "/BookDetail.jsp", "/check", "/adUserList.jsp",
-		"/bookinfo" })
+@WebFilter(filterName = "/PropertyFilter", urlPatterns = { "/main.do", "/BookDetail.jsp", "/bookinfo" })
 public class PropertyFilter implements Filter {
 	String key;
 

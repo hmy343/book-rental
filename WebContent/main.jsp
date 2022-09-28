@@ -16,12 +16,10 @@
 <link href="./css/temple.css" rel="stylesheet" type="text/css">
 <link href="./css/bootstrap.css" rel="stylesheet" type="text/css">
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 <!-- 제이쿼리로 API 호출하기 위한 기본 스크립트 공식 홈피 참고 -->
 <script type="text/javascript">
-
-   //  localStorage.setItem("key", "${key}");
-  // 검색 버튼 누르면 호출 하도록 함수 안에 ajax 진행(호출 기능)
-  
   	localStorage.setItem("key", "${key}");
   
   	var searchKey = localStorage.getItem("key");
@@ -30,44 +28,11 @@
     		  localStorage.removeItem("key");
     		  searchKey = null;
     	  }
-    	  
-  function search() {
-	  
-	  
-	  $.ajax({
-		   // 통신 방식
-		     method: "GET",
-		     
-		   //API 주소
-		     url: "https://dapi.kakao.com/v3/search/book?target=title",
-		           
-		   //$("#bookName").val() 인풋 박스 벨류값 을 받아서 쿼리 문 작성
-		   
-		     data: { query : $("#keyword").val()},
-		     
-		   
-		    // API 권한 받기 위한 인증키 
-		    
-		     headers: {Authorization: searchKey},
-		     
-		  
-		   })
-		   // 호출 완료 시 해당 책이름이 포함되니 모든 데이터가 msg 매게 변수로 JSON 타입의 배열객체로 받아짐
-		     .done(function( msg ) {
-		    	 console.log(msg);
-		    	for(var i = 0 ; i < 8 ; i++){
-		    		$("#title"+ (i+1)).append(msg.documents[i].title);
-			 		$("#figure"+ (i+1)).append("<img class='img-fluid' src='" + msg.documents[i].thumbnail+"' onclick= \" location.href= 'BookDetail.jsp?title="+msg.documents[i].title+"'\"/>");
-
-		    	};
-	
-		     })
-		  };
-		
-  </script>
+</script>
 
 </head>
 <body>
+
 	<jsp:include page="header.jsp" />
 
 	<!-- 검색창 -->
@@ -196,7 +161,68 @@
 			</div>
 		</div>
 	</div>
+		
+	<script type="text/javascript">
+
+function search() {
+	var bookDataList = null;
+	<% String pageNum = request.getParameter("listPage");%>
+	var searchWebParam = {
+		      'query' : $("#keyword").val(),
+		      'size' : 8,
+		      'page' : 1	
+		};
+	  
+	  $.ajax({
+		   // 통신 방식
+		     method: "GET",
+		     
+		   //API 주소
+		     url: "https://dapi.kakao.com/v3/search/book?target=title",
+		     data: searchWebParam,
+		     headers: {Authorization: searchKey},
+		     async: false
+		   })
+		     .done(function( msg ) {
+		   
+			 		 
+			 	bookDataList = msg;
+		    	
+	
+		     })
+		     
+		     for(var i = 0 ; i < 8 ; i++){
+		    	 
+		    	 
+		    	 document.getElementById("title"+ (i+1)).innerHTML= bookDataList.documents[i].title;
+		    	 document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList.documents[i].thumbnail+"' onclick= \" location.href= 'BookDetail.jsp?title="+bookDataList.documents[i].title+"'\"/>";
+			 };
+		     
+		  };
+		  
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 
+	<nav aria-label="Page navigation example">			
+	  <ul class="pagination justify-content-center">
+	    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="main.jsp?listPage = 1" onclick="search()">1</a></li>
+    <li class="page-item"><a class="page-link" href="main.jsp?listPage = 2" onclick="search()">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+	  </ul>
+	</nav>
+			
 </body>
 </html>

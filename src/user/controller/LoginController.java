@@ -40,7 +40,8 @@ public class LoginController extends HttpServlet {
 				req.getRequestDispatcher("./user-list").forward(req, res);
 			} else {
 //				res.sendRedirect(req.getHeader("Referer"));
-				req.getRequestDispatcher("main.jsp").forward(req, res);
+				res.sendRedirect("main.jsp");
+//				req.getRequestDispatcher("main.jsp").forward(req, res);
 			}
 			
 		} catch (SQLException e) {

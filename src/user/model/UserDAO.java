@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import user.dto.UserDTO;
 import util.DBUtil;
@@ -76,7 +77,7 @@ public class UserDAO {
 	}
 
 	// AD 등급 제외한 모든 유저 조회
-	public  static ArrayList<UserDTO> getAllUser() throws SQLException{
+	public static ArrayList<UserDTO> getAllUser() throws SQLException{
 		Connection con = null;	
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

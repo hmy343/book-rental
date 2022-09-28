@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import exception.NotExistException;
+import exception.ExistUserException;
 import user.dto.UserDTO;
 
 public class UserService {

@@ -17,9 +17,13 @@ public class BookDAO {
 		ResultSet rset = null;
 		
 		ArrayList<RentalVO> alist = null;
-		String query="select TB_RENTALS.*, TB_USERS.US_GRADE, TB_BOOKS.BK_TITLE from TB_RENTALS\r\n" + 
-				"join TB_USERS on TB_RENTALS.US_ID = TB_USERS.US_ID \r\n" + 
-				"join TB_BOOKS on TB_RENTALS.BK_ISBN = TB_BOOKS.BK_ISBN";	
+//		String query="select TB_RENTALS.*, TB_USERS.US_GRADE, TB_BOOKS.BK_TITLE from TB_RENTALS\r\n" + 
+//				"join TB_USERS on TB_RENTALS.US_ID = TB_USERS.US_ID \r\n" + 
+//				"join TB_BOOKS on TB_RENTALS.BK_ISBN = TB_BOOKS.BK_ISBN";
+		// TB_RENTAL, TB_USERS, TB_BOOKS 테이블 사용
+		String query="select rt.*, us.US_GRADE, bk.BK_TITLE from TB_RENTALS as rt\r\n" + 
+				"join TB_USERS as us on rt.US_ID = us.US_ID \r\n" + 
+				"join TB_BOOKS as bk on rt.BK_ISBN = bk.BK_ISBN";	
 		
 		try {
 			con = DBUtil.getConnection();
@@ -27,6 +31,7 @@ public class BookDAO {
 			rset = pstmt.executeQuery();
 			alist = new ArrayList<RentalVO>();
 			while(rset.next()){
+				// 
 				alist.add(new RentalVO(rset.getLong(1),rset.getString(2),
 						rset.getDate(3),rset.getDate(4),rset.getDate(5)
 		 				,rset.getInt(6),rset.getString(7),rset.getString(8)));

@@ -107,11 +107,11 @@ crossorigin="anonymous"></script>
 		   })
 		   
 		   // 호출 완료 시 해당 책이름이 포함되니 모든 데이터가 msg 매게 변수로 JSON 타입의 배열객체로 받아짐
-	       .done(function( msg ) {
-	         	 bookDetailData = msg.documents[0];
-			
-	       })
-	      
+		     .done(function( msg ) {
+		    	 bookDetailData = msg.documents[0];
+				
+		     })
+		     console.log(bookDetailData);
 		     
 			document.getElementById("list0").innerHTML = "<img src='" + bookDetailData.thumbnail+"'/>";
 			document.getElementById("list1").innerHTML = bookDetailData.title ;

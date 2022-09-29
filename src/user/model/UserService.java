@@ -38,11 +38,14 @@ public class UserService {
 	}
 	
 	// id 존재 여부 확인
-//	public void idCheck(String usId) throws ExistUserException, SQLException {
-//		String checkId = UserDAO.idCheck(usId);
-//		if(checkId != null) {
-//			throw new ExistUserException();
-//		}
-//	}
+	public boolean idCheck(String checkUsId) throws ExistUserException, SQLException {
+			
+		if(UserDAO.idCheck(checkUsId) == null) {
+			
+			return true;
+		}
+		
+		return false;
+	}
 	
 }

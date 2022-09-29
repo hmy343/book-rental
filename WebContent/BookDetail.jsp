@@ -16,12 +16,6 @@
   .card-title {padding-top: 0; font-size: 1.2rem; font-weight: 700;}
   .card-url {display: flex; justify-content: flex-end;}
 </style>
-
-<script type="text/javascript"
-src="https://code.jquery.com/jquery-3.6.1.js"
-integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-crossorigin="anonymous"></script> 
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script> 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -36,7 +30,7 @@ crossorigin="anonymous"></script>
 	      <div class="col-md-5 p-lg-5 mx-auto my-5 bk_detail_bg">
 	        <h1 class="display-4 fw-normal">Book-Rental</h1>
 	        <p class="lead fw-normal">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</p>
-	        <a class="btn btn-outline-secondary" href="#">목록으로 이동</a>
+	        <a class="btn btn-outline-secondary" href="main.do">목록으로 이동</a>
 	      </div>
 	    </div>
 	    
@@ -87,33 +81,12 @@ crossorigin="anonymous"></script>
 	localStorage.setItem("key", "${key}");
   	var searchKey = localStorage.getItem("key");
   	
-  	var bookDetailData = null;
-	// 받아온 타이틀로 재호출
-		  $.ajax({
-		   // 통신 방식
-		     method: "post",
-		     
-		   //API 주소
-		     url: "https://dapi.kakao.com/v3/search/book?",
-		           
-		   //위에서 쿼리 스트링을 저장한  keyword 변수를 이용해 쿼리 문 작성
-		     data: { query : "<%=keyword%>"},
-		     
-		   // API 권한 받기 위한 인증키 
-		     headers: {Authorization: searchKey },
-		     
-		   //동기로 처리  
-		     async: false
-		   })
-		   
-		   // 호출 완료 시 해당 책이름이 포함되니 모든 데이터가 msg 매게 변수로 JSON 타입의 배열객체로 받아짐
-		     .done(function( msg ) {
-		    	 bookDetailData = msg.documents[0];
-				
-		     })
-		     console.log(bookDetailData);
-		     
-			document.getElementById("list0").innerHTML = "<img src='" + bookDetailData.thumbnail+"'/>";
+			 axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
+	             headers: {Authorization: searchKey},
+	             params: { 'query' : "<%=keyword%>"}
+	       })
+	       .then(res => { var bookDetailData = res.data.documents[0];
+	       	document.getElementById("list0").innerHTML = "<img src='" + bookDetailData.thumbnail+"'/>";
 			document.getElementById("list1").innerHTML = bookDetailData.title ;
 			document.getElementById("list2").innerHTML = bookDetailData.authors;
 			document.getElementById("list3").innerHTML = bookDetailData.publisher;
@@ -121,7 +94,7 @@ crossorigin="anonymous"></script>
 			document.getElementById("list5").innerHTML = bookDetailData.contents;
 			document.getElementById("list6").innerHTML ="<a href='" + bookDetailData.url +"'>MoreView</a>";
 			
- 			const authorsArr = bookDetailData.authors;
+			const authorsArr = bookDetailData.authors;
  			const sendAuthors = authorsArr.join([","]);
  			console.log(sendAuthors);
 			const sendData = {'data' :
@@ -136,13 +109,14 @@ crossorigin="anonymous"></script>
 									}
 										
 							  };
-			axios.get("http://localhost:8086/bookRental/bookinfo"
+			axios.get("/bookProject/bookinfo"
 					,{params: sendData}
 			).then(res => console.log(res));
-			
-			
-			
-			
+	       			
+	             		}
+	       
+	       		);
+			 		
   </script>	
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

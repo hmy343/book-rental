@@ -19,7 +19,7 @@ public class UserDTO {
 	private String usPw;
 	private String usEmail;
 	private String usPhnum;
-	private String usGrade;
+	private UsGradeEnum usGrade;
 	private int usOverdue;
 	private Date usJoinDate;
 	private int usEmailAgree;
@@ -31,7 +31,7 @@ public class UserDTO {
 	public UserDTO(String usId, String usGrade) {
 		super();
 		this.usId = usId;
-		this.usGrade = UsGradeEnum.valueOf(usGrade).getGrade();
+//		this.usGrade = UsGradeEnum.valueOf(usGrade).getGrade();
 	}
 
 
@@ -56,14 +56,16 @@ public class UserDTO {
 	}
 
 
-	public UserDTO(String usId, String usPw, String usEmail, String usPhnum, String usGrade, int usOverdue,
+//	public UserDTO(String usId, String usPw, String usEmail, String usPhnum, String usGrade, int usOverdue,
+	public UserDTO(String usId, String usPw, String usEmail, String usPhnum, UsGradeEnum usGrade, int usOverdue,
 			Date usJoinDate, int usEmailAgree, Date usBirtyDay, int usStatus, Date usLastAccess) {
 		super();
 		this.usId = usId;
 		this.usPw = usPw;
 		this.usEmail = usEmail;
 		this.usPhnum = usPhnum;
-		this.usGrade = UsGradeEnum.valueOf(usGrade).getGrade();
+//		this.usGrade = UsGradeEnum.valueOf(usGrade).getGrade();
+		this.usGrade = usGrade;
 		this.usOverdue = usOverdue;
 		this.usJoinDate = usJoinDate;
 		this.usEmailAgree = usEmailAgree;

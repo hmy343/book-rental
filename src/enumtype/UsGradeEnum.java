@@ -1,21 +1,20 @@
 package enumtype;
 
 public enum UsGradeEnum {
-	AD("AD", "Admin"),
-	B("B", "Bronze"),
-	S("S", "Silver"),
-	G("G", "Gold"),
-	P("P", "Platinum");
+	AD("Admin"),
+	B("Bronze"),
+	S("Silver"),
+	G("Gold"),
+	P("Platinum");
 
-	private String gradeCode;
 	private String grade;
 	
-	UsGradeEnum(String gradeCode, String grade) {
-		this.gradeCode = gradeCode;
+	UsGradeEnum(String grade) {
 		this.grade = grade;
 	}
 	
 	public String getGrade() {
 		return grade;
 	}
+	
 }

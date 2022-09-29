@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import enumtype.UsGradeEnum;
 import user.dto.UserDTO;
 import util.DBUtil;
 
@@ -92,7 +93,7 @@ public class UserDAO {
 			alist = new ArrayList<UserDTO>();
 			while(rset.next()){
 				alist.add(new UserDTO(rset.getString(1),rset.getString(2),
-						rset.getString(3),rset.getString(4),rset.getString(5)
+						rset.getString(3),rset.getString(4),UsGradeEnum.valueOf(rset.getString(5))
 		 				,rset.getInt(6),rset.getDate(7),rset.getInt(8),rset.getDate(9)
 		 				,rset.getInt(10),rset.getDate(11)));
 			}
@@ -119,9 +120,7 @@ public class UserDAO {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				result = rset.getString(1);
-				
 				return result;
-				
 			}
 		} finally {
 			DBUtil.close(con, pstmt);

@@ -32,7 +32,7 @@ public class UserService {
 		return UserDAO.joinUser(UserDTO);
 	}
 	
-	// 전체 회원 검색
+	// 관리자 제외한 전체 회원 검색
 	public ArrayList<UserDTO> getAllUser() throws SQLException{
 		return UserDAO.getAllUser();
 	}

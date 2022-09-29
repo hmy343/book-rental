@@ -7,16 +7,16 @@
 <title>Sign Up</title>
 <!-- Bootstrap core CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="./dashboard.css">
-
+<link rel="stylesheet" href="./css/dashboard.css">
 <style type="text/css">
 .phone_content {display: flex; justify-content: space-between;}
 </style>
-<script type="text/javascript">
-	request.getAtt
-</script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="bg-light">
+ 
+
    <jsp:include page="header.jsp"/>
    
 	<div class="container">
@@ -38,7 +38,9 @@
 				<div class="input-group mb-3">
 					<div class="col">
 						<label for="newUsId" class="form-label">User ID</label>
-						<input type="text" name="newUsId" class="form-control"/>
+						<input id="newUsIdVal" type="text" name="newUsId" class="form-control"/>
+						 <button onclick="callCheckId()" type="button">아이디확인 </button>
+						 <div id ="idWarning" ></div>
 					</div>
 				</div>
 				<div class="input-group mb-3">
@@ -104,10 +106,42 @@
 			</form>
 		</main>
 	</div>
-  
    
    <!-- 생년월일 셀렉트 태그 데이터 생성 로직  -->
+   
+
+
    <script type="text/javascript">
+ 
+   
+   
+   async function callCheckId() {
+	   
+	   
+		  var checkId = document.getElementById("newUsIdVal").value;
+		  
+		  
+  			const result = await axios.get("/bookProject/idcheck",
+			
+				  {params: { 'checkId' : checkId }}
+		  
+			).then(res => res.data)
+			
+			
+			if(result === '중복') {
+				document.getElementById("idWarning").innerHTML = "<span style='color: red'>아이디 중복입니다</span>"	
+
+			}else{
+				
+				document.getElementById("idWarning").innerHTML = "<span style='color: blue'>해당 아이디 사용이 가능합니다</span>"
+			}
+	   }
+
+  
+   
+ 	
+   
+   
    function checkValid() {
 	    var f = window.document.writeForm;
 			
@@ -171,6 +205,5 @@
    </script>
    
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-</body>
+	</body>
 </html>

@@ -105,27 +105,31 @@ public class UserDAO {
 	}
 	
 	// id가 존재하는지 체크
-//	public static String idCheck(String usId) throws SQLException {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		String result = "";
-//		
-//		String query = "SELECT US_ID FROM TB_USERS WHERE US_ID = ?";
-//		
-//		try {			
-//			con = DBUtil.getConnection();
-//			pstmt = con.prepareStatement(query);
-//			pstmt.setString(1, usId);
-//			rset = pstmt.executeQuery();
-//			if(rset.next()) {
-//				result = rset.getString(1);
-//			}
-//		} finally {
-//			DBUtil.close(con, pstmt);
-//		}
-//		
-//		return result;
-//	}
+	public static String idCheck(String checkUsId) throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset ;
+		String result = null;
+		
+		String query = "SELECT US_ID FROM TB_USERS WHERE US_ID = ?";
+		
+		try {			
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,checkUsId);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result = rset.getString(1);
+				
+				return result;
+				
+			}
+		} finally {
+			DBUtil.close(con, pstmt);
+		}
+		
+		return result;
+	}
 
 }

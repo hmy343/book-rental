@@ -209,7 +209,7 @@
          console.log(res.data);
                for(var i = 0 ; i < 8 ; i++){
                         document.getElementById("title"+ (i+1)).innerHTML= bookDataList2[i].title;
-                        document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList2[i].thumbnail+"' onclick= \" location.href= 'BookDetail.jsp?title="+bookDataList2[i].title+"'\"/>";
+                        document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList2[i].thumbnail+"' onclick= \" location.href= 'bookDetail.jsp?title="+bookDataList2[i].title+"'\"/>";
                      };
                }
          

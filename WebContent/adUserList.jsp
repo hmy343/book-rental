@@ -135,11 +135,11 @@
 								<td>${data.usOverdue}</td>
 								<td>${data.usStatus}</td>
 								<td><select name="us_grade">
-										<option value="" selected>${data.usGrade}</option>
-										<option value="bronze">B</option>
-										<option value="silver">S</option>
-										<option value="gold">G</option>
-										<option value="platinum">P</option>
+										<option value="" selected>${data.usGrade.grade}</option>
+										<option value="B">B</option>
+										<option value="S">S</option>
+										<option value="G">G</option>
+										<option value="P">P</option>
 								</select></td>
 							</tr>
 						</c:forEach>
@@ -165,6 +165,5 @@
 		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
 		integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
 		crossorigin="anonymous"></script>
-
 </body>
 </html>

@@ -10,12 +10,18 @@
 <style>
   .detail_wrapper {margin-top: 60px; margin-bottom: 100px;}
   .k_detail_bg {background-image: url("./img/k_detail_bg.jpg") !important;}
-  .ratio>* {left: 15%;}
+  .ratio>* {left: 15% !important;}
   .tumbnail {background: #ccc; margin-bottom: 20px; }
   .tumbnail img {width: 70%;}
   .card-title {padding-top: 0; font-size: 1.2rem; font-weight: 700;}
   .card-url {display: flex; justify-content: flex-end;}
 </style>
+
+<script type="text/javascript"
+src="https://code.jquery.com/jquery-3.6.1.js"
+integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+crossorigin="anonymous"></script> 
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script> 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -40,7 +46,9 @@
       <div class="row flex-nowrap" id="bookDetailInfo" action="bookinfo" method="get" >
         <div class="col">
           <div id=list0 class="tumbnail ratio ratio-1x1"><img class="rounded mx-auto d-block" src="https://www.cbc.ca/kidsnews/content/_card_resize/BlueMonday_thumbnail.jpg"/></div>
-          <div class="row" style="box-sizing: border-box !important;"><button type="submit" class="btn btn-outline-primary">대여하기</button></div>
+          <div class="row" style="box-sizing: border-box !important;">
+          	<button id="rental_btn" type="submit" class="btn btn-outline-primary">대여하기</button>
+          </div>
         </div>
   
         <div class="col-7 info_content">
@@ -79,7 +87,7 @@
     //main 페이지에서 사진을 클릭시 전달한 제목을 파라미터로 저장
 	<% String keyword = request.getParameter("title");%>
 	localStorage.setItem("key", "${key}");
-  	var searchKey = localStorage.getItem("key");
+  	let searchKey = localStorage.getItem("key");
   	
 			 axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
 	             headers: {Authorization: searchKey},

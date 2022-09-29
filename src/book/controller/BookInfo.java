@@ -1,16 +1,27 @@
 package book.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.HTTP;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import com.mysql.cj.Session;
+
+import book.dto.BookDTO;
+import book.model.BkService;
+import rental.model.RentalDTO;
+import rental.model.rentalService;
 
 
 @WebServlet("/bookinfo")
@@ -20,8 +31,8 @@ public class BookInfo extends HttpServlet {
 		 req.setCharacterEncoding("utf-8");
 		
 		  String input =req.getParameter("data");
-
 		  System.out.println(input);
+		
 		  
 		  JSONParser parser = new JSONParser();        
 		  
@@ -39,26 +50,54 @@ public class BookInfo extends HttpServlet {
 			 String bkUrl = (String) jsonObj.get("url");
 			 String bkAuthors = (String) jsonObj.get("authors");
 			 
-			  System.out.println(bkTumbnail);
-			  System.out.println(bkTitle); 
-			  System.out.println(bkAuthors);
-			  System.out.println(bkPublisher); 
-			  System.out.println(bkDatetime);
-			  System.out.println(bkIsbn); 
-			  System.out.println(bkContents);
-			  System.out.println(bkUrl);
+			 
+			 
+			 // isbn이 2개이상 있을 경우 공백기준으로 잘라내기
+			 // isbn 현재 상태 : isbn10 isbn13
+			  if(bkIsbn.length() >= 13) {
+				  bkIsbn = bkIsbn.split(" ")[1];
+			  }
 			  
-
 			  
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		  		
-		// 임시 페이지 이동
-		/*
-		 * req.getRequestDispatcher("main.jsp").forward(req, resp);
-		 */
+			  
+			  // bkDatetime
+			  // string -> sql.date
+			  
+			  // v1 : bkDatetime의 문자정보를 index 기준 0 ~ 10 자리를 잘라 리턴한 값을 date로 변환
+			  Date date = Date.valueOf(bkDatetime.toString().substring(0, 10));
+			  
+			  // v2
+//			  Date date = Date.valueOf(bkDatetime.toString().split("T")[0]);
+			  
+			  boolean result = false;
+			  BookDTO bkDTOArr = new BookDTO(Long.parseLong(bkIsbn), bkTitle, bkContents, bkUrl, date, bkAuthors, bkTumbnail, bkPublisher);
+			  
+				// 로그인한 사용자 정보를 세션에 저장하기 위한 세션 객체 생성
+				HttpSession loginSession = req.getSession();
+				String usId = (String) loginSession.getAttribute("usId");
+				System.out.println(usId);
+				
+			  RentalDTO rentalDTOArr = new RentalDTO(Long.parseLong(bkIsbn), usId);
+			  
+			  
+			  try {
+				  result = BkService.addData(bkDTOArr);
+					if(result) { 
+						rentalService.addData(rentalDTOArr);
+					};
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				  
+				  
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			  		
+		 
+			
+		  		  
+		  		  
 	}
 
 }

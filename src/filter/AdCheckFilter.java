@@ -36,7 +36,6 @@ public class AdCheckFilter implements Filter {
 
 		// 경로에 대한 구분과 grade에 대한 구분이 필요함
 		// admin페이지의 경우 일반 사용자 접근 불가능
-		System.out.println(session.getAttribute("usGrade"));
 		if (Arrays.asList(adminBox).contains(req.getServletPath())) {
 			if (!"Admin".equals(session.getAttribute("usGrade"))) {
 				res.sendRedirect("./main.do");

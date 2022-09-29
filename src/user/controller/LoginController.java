@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 			// 로그인한 사용자 정보를 세션에 저장하기 위한 세션 객체 생성
 			HttpSession loginSession = req.getSession();
 			loginSession.setAttribute("usId", usId);
-			loginSession.setAttribute("usGrade", loginUser.getUsGrade());
+			loginSession.setAttribute("usGrade", loginUser.getUsGrade().getGrade());
 			
 			res.sendRedirect("./main.do");
 			

@@ -24,7 +24,7 @@ public class LoginFilter implements Filter {
 	// 로그인이 필요없는 부분
 	// 메인화면, 도서 상세 페이지
 	public void init(FilterConfig fConfig) throws ServletException {
-		whiteBox = new String[] { "/main.do", "/main.jsp", "/bookDetail.jsp", "/login", "/login.jsp"};
+		whiteBox = new String[] { "/main.do", "/main.jsp", "/login", "/login.jsp", "/bookDetail.jsp"};
 		loginBox = new String[] {"/login.jsp", "/login"};
 	}
 
@@ -37,14 +37,17 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
-
+		
 		if (!Arrays.asList(whiteBox).contains(req.getServletPath()) && session.getAttribute("usId") == null) {
 			res.sendRedirect("./login.jsp");
 			return;
 		} else if (Arrays.asList(loginBox).contains(req.getServletPath()) && session.getAttribute("usId") != null) {
 			res.sendRedirect("./main.do");
 			return;
-		} 
+		}
+//		else if (req.getServletPath().contains("./bookDetail.jsp")) {
+//			chain.doFilter(request, response);
+//		}
 
 		chain.doFilter(request, response);
 

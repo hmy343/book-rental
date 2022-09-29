@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BookDetail.jsp</title>
+<title>bookDetail.jsp</title>
 <!-- Bootstrap core CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <style>
@@ -86,6 +86,7 @@ crossorigin="anonymous"></script>
   <script type="text/javascript">
     //main 페이지에서 사진을 클릭시 전달한 제목을 파라미터로 저장
 	<% String keyword = request.getParameter("title");%>
+	
 	localStorage.setItem("key", "${key}");
   	let searchKey = localStorage.getItem("key");
   	

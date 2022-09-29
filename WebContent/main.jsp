@@ -231,7 +231,7 @@
        .then(res => { var bookDataList1 = res.data.documents;   	  				   	  			
              for(var i = 0 ; i < 8 ; i++){
                       document.getElementById("title"+ (i+1)).innerHTML= bookDataList1[i].title;
-                      document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList1[i].thumbnail+"' onclick= \" location.href= 'BookDetail.jsp?title="+bookDataList1[i].title+"'\"/>";
+                      document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList1[i].thumbnail+"' onclick= \" location.href= 'bookDetail.jsp?title="+bookDataList1[i].title+"'\"/>";
                    						};
              		}
        

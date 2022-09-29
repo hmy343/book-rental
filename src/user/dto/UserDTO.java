@@ -11,7 +11,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class UserDTO {
@@ -28,10 +28,10 @@ public class UserDTO {
 	private Date usLastAccess;
 	
 	
-	public UserDTO(String usId, String usGrade) {
+	public UserDTO(String usId, UsGradeEnum usGrade) {
 		super();
 		this.usId = usId;
-//		this.usGrade = UsGradeEnum.valueOf(usGrade).getGrade();
+		this.usGrade = usGrade;
 	}
 
 
@@ -57,22 +57,20 @@ public class UserDTO {
 
 
 //	public UserDTO(String usId, String usPw, String usEmail, String usPhnum, String usGrade, int usOverdue,
-	public UserDTO(String usId, String usPw, String usEmail, String usPhnum, UsGradeEnum usGrade, int usOverdue,
-			Date usJoinDate, int usEmailAgree, Date usBirtyDay, int usStatus, Date usLastAccess) {
-		super();
-		this.usId = usId;
-		this.usPw = usPw;
-		this.usEmail = usEmail;
-		this.usPhnum = usPhnum;
+//			Date usJoinDate, int usEmailAgree, Date usBirtyDay, int usStatus, Date usLastAccess) {
+//		super();
+//		this.usId = usId;
+//		this.usPw = usPw;
+//		this.usEmail = usEmail;
+//		this.usPhnum = usPhnum;
 //		this.usGrade = UsGradeEnum.valueOf(usGrade).getGrade();
-		this.usGrade = usGrade;
-		this.usOverdue = usOverdue;
-		this.usJoinDate = usJoinDate;
-		this.usEmailAgree = usEmailAgree;
-		this.usBirtyDay = usBirtyDay;
-		this.usStatus = usStatus;
-		this.usLastAccess = usLastAccess;
-	}
+//		this.usOverdue = usOverdue;
+//		this.usJoinDate = usJoinDate;
+//		this.usEmailAgree = usEmailAgree;
+//		this.usBirtyDay = usBirtyDay;
+//		this.usStatus = usStatus;
+//		this.usLastAccess = usLastAccess;
+//	}
 	
 	
 	

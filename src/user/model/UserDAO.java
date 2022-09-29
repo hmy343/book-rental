@@ -29,7 +29,7 @@ public class UserDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				loginUser = new UserDTO(rset.getString("US_ID"), rset.getString("US_GRADE"));
+				loginUser = new UserDTO(rset.getString(1), UsGradeEnum.valueOf(rset.getString(2)));
 			}
 			
 			// 로그인 정보가 존재하면 해당 user의 접속기록 업데이트

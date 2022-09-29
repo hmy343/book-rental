@@ -26,16 +26,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>adCheckFilter</filter-name>
-		<url-pattern>/main.do</url-pattern>
-	</filter-mapping>
-	
-	<filter>
-		<filter-name>notAdminFilter</filter-name>
-		<filter-class>filter.NotAdminFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>notAdminFilter</filter-name>
-		<url-pattern>/admin-user</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
 	<context-param>

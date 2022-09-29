@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +13,7 @@
 <style type="text/css">
 .phone_content {display: flex; justify-content: space-between;}
 </style>
-<script type="text/javascript">
-	request.getAtt
-</script>
+  
 </head>
 <body class="bg-light">
    <jsp:include page="header.jsp"/>
@@ -34,7 +33,7 @@
 				<h4 class="mb-3">Sign Up</h4>
 			</div>
 			
-			<form action="joinus" method="post" class="needs-validation" novalidate>
+			<form name="writeForm" action="joinus" method="post" class="needs-validation" onSubmit='return checkValid()' novalidate>
 				<div class="input-group mb-3">
 					<div class="col">
 						<label for="newUsId" class="form-label">User ID</label>
@@ -50,7 +49,7 @@
 				<div class="input-group mb-3">
 					<div class="col">
 						<label for="pwCheck" class="form-label">비밀번호 확인</label>
-						<input type="password" class="form-control"/>
+						<input type="password" name="newUsPw2" class="form-control"/>
 					</div>
 				</div>
 				
@@ -105,9 +104,8 @@
 		</main>
 	</div>
   
-   
-   <!-- 생년월일 셀렉트 태그 데이터 생성 로직  -->
    <script type="text/javascript">
+   /* 회원가입시 입력값 확인 로직 */
    function checkValid() {
 	    var f = window.document.writeForm;
 			
@@ -141,7 +139,7 @@
 		}
 	    return true;
 	}
-   
+   	/*  생년월일 셀렉트 태그 데이터 생성 로직 */
       // birth_year
       let birth_year = document.getElementById("birth_year");
         for(let i = 1970; i < new Date( ).getFullYear( ) +1; i++) {

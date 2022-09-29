@@ -44,6 +44,7 @@ public class AdCheckFilter implements Filter {
 			}
 		} else {
 			if ("Admin".equals(session.getAttribute("usGrade"))) {
+//				req.getRequestDispatcher("./admin-user").forward(req, res);
 				res.sendRedirect("./admin-user");
 				return;
 			}

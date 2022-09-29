@@ -26,7 +26,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>adCheckFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/main.do</url-pattern>
 	</filter-mapping>
 	
 	<context-param>

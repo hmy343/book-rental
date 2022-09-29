@@ -152,7 +152,7 @@ crossorigin="anonymous"></script>
 				).then(res => console.log(res));
 				
 			}
-			
+			<%-- 버튼 클릭 이벤트--%>
 			btn.addEventListener('click', handleApiData);
 			
 			

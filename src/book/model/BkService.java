@@ -1,6 +1,7 @@
 package book.model;
 
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -10,12 +11,12 @@ import book.dto.BookDTO;
 public class BkService {
 
 	public static void test(String usId, String usPw) {
-		System.out.println(usId + usPw);
+		System.out.println(usId + usPw); 
 	}
 
-	public static void addData(BookDTO bkDTOArr) {
-//		System.out.println(bkDTOArr);
-		return;
+	// 도서 정보 추가 및 rentalIsbn 리턴
+	public static boolean addData(BookDTO bkDTOArr) throws SQLException {
+		return BookDAO.insertBooks(bkDTOArr);
 	}
 
 }

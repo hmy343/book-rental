@@ -109,7 +109,7 @@
 									}
 										
 							  };
-			axios.get("/bookProject/bookinfo"
+			axios.get("./bookinfo"
 					,{params: sendData}
 			).then(res => console.log(res));
 	       			

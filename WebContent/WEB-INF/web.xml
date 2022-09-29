@@ -29,15 +29,6 @@
 		<url-pattern>/main.do</url-pattern>
 	</filter-mapping>
 	
-	<filter>
-		<filter-name>notAdminFilter</filter-name>
-		<filter-class>filter.NotAdminFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>notAdminFilter</filter-name>
-		<url-pattern>/admin-user</url-pattern>
-	</filter-mapping>
-	
 	<context-param>
 		<param-name>APIConfig</param-name>
 		<param-value>/WEB-INF/config.properties</param-value>

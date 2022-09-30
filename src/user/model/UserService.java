@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import exception.ExistUserException;
 import user.dto.UserDTO;
 
@@ -47,5 +50,12 @@ public class UserService {
 		
 		return false;
 	}
+	
+	// grade 수정
+	public boolean updateGrade(String userId, String updateGrade) throws SQLException {
+		
+		return UserDAO.userGradeUpdate(userId, updateGrade);
+	}
+	
 	
 }

@@ -21,14 +21,14 @@
 	<nav
 		class="navbar navbar-dark bg-primary fixed-top flex-md-nowrap p-0 shadow">
 		<div class="container-fluid logo">
-			<a class="navbar-brand" href="main.jsp"> <i
+			<a class="navbar-brand" href="main.do"> <i
 				class="fas fa-film mr-2"></i> Book Rental
 			</a>
 
 
 			<ul class="nav d-flex">
 				<li class="nav-item nav-link-3 text-nowrap">UserID</li>
-				<li class="nav-item nav-link-4 text-nowrap" href="login.jsp"
+				<li class="nav-item nav-link-4 text-nowrap" href="logout"
 					onclick="">LogOut</li>
 			</ul>
 		</div>

@@ -10,7 +10,10 @@
 <link rel="stylesheet" href="./dashboard.css">
 
 <style type="text/css">
-.phone_content {display: flex; justify-content: space-between;}
+	.new_us_id_wrppaer {position: relative;}
+	.id_check_btn {cursor: pointer;}
+	.id_check_text {position: absolute; top:4.7rem; left: 0;}
+	.phone_content {display: flex; justify-content: space-between;}
 </style>
 <script type="text/javascript">
 	request.getAtt
@@ -30,17 +33,26 @@
 		       <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
 			</div>
 			
-			<div class="row g-5">
-				<h4 class="mb-3">Sign Up</h4>
-			</div>
+			<hr />
+			<br />
 			
 			<form action="joinus" method="post" class="needs-validation" novalidate>
 				<div class="input-group mb-3">
-					<div class="col">
-						<label for="newUsId" class="form-label">User ID</label>
-						<input type="text" name="newUsId" class="form-control"/>
+					<div class="col new_us_id_wrppaer">
+						<label for="newUsId" class="form-label">User ID</label> 
+						<div class="input-group mb-3">
+							<input 
+								id="newUsIdVal"
+								type="text"
+								name="newUsId"
+								class="form-control" 
+							/>
+							<span class="input-group-text id_check_btn" onclick="callCheckId()">아이디확인</span>
+						</div>
+						<div id="idWarning" class="id_check_text"></div>
 					</div>
 				</div>
+				
 				<div class="input-group mb-3">
 					<div class="col">
 						<label for="newUsPw" class="form-label">비밀번호</label>
@@ -106,8 +118,31 @@
 	</div>
   
    
-   <!-- 생년월일 셀렉트 태그 데이터 생성 로직  -->
    <script type="text/javascript">
+   
+   // 아이디 중복 확인
+	async function callCheckId() {
+	document.getElementById("idWarning").innerHTML = "<span style='color: red'>* 중복된 아이디입니다.</span>"	
+	 
+	 <%--
+		var checkId = document.getElementById("newUsIdVal").value;
+		 
+		const result = await axios.get("./idcheck",
+			  {params: { 'checkId' : checkId }}
+		).then(res => res.data)
+		
+		
+		if(result === '중복') {
+			document.getElementById("idWarning").innerHTML = "<span style='color: red'>* 중복된 아이디입니다.</span>"	
+		}else{
+			document.getElementById("idWarning").innerHTML = "<span style='color: blue'>* 사용이 가능한 아이디입니다.</span>"
+		}
+		--%>
+		
+	}
+	
+   
+   
    function checkValid() {
 	    var f = window.document.writeForm;
 			
@@ -142,6 +177,8 @@
 	    return true;
 	}
    
+   
+	  // 생년월일 셀렉트 옵션 생성 로직
       // birth_year
       let birth_year = document.getElementById("birth_year");
         for(let i = 1970; i < new Date( ).getFullYear( ) +1; i++) {

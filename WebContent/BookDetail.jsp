@@ -54,7 +54,7 @@ crossorigin="anonymous"></script>
         <div class="col-7 info_content">
           <h5>도서 소개</h5>
           <hr/>
-          <div id=list1 class="card-title">예민함이라는 선물</div>	
+          <div id=list1 class="card-title"></div>	
           <dl>
             <div class="row">
               <dt class="col-lg-2">저자</dt>

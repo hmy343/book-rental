@@ -25,7 +25,7 @@ public class AdCheckFilter implements Filter {
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		adminBox = new String[] { "/admin-user", "/adUserList.jsp", "/adRentalList.jsp", "/admin-rental", "/dashboard.js"};
+		adminBox = new String[] { "/admin-user", "/adUserList.jsp", "/adRentalList.jsp", "/admin-rental", "/dashboard.js", "/changeuserlist"};
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

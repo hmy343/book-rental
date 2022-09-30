@@ -24,7 +24,7 @@ public class LoginFilter implements Filter {
 	// 로그인이 필요없는 부분
 	// 메인화면, 도서 상세 페이지
 	public void init(FilterConfig fConfig) throws ServletException {
-		whiteBox = new String[] { "/main.do", "/main.jsp", "/ .jsp",  "/logout"};
+		whiteBox = new String[] { "/main.do", "/main.jsp", "/bookDetail.jsp",  "/logout"};
 		loginBox = new String[] { "/login.jsp", "/login" };
 	}
 

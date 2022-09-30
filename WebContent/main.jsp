@@ -19,16 +19,12 @@
 	margin: 60px 0;
 }
 </style>
-<!-- 제이쿼리로 API 호출하기 위한 기본 스크립트 공식 홈피 참고 -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.6.1.js"
-	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
 <!-- css 템플릿 -->
 <link href="./css/font.css" rel="stylesheet" type="text/css">
 <link href="./css/temple.css" rel="stylesheet" type="text/css">
-
+<!-- axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -174,10 +170,8 @@
 			<li class="page-item"><a class="page-link" href="#"
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
-			<li class="page-item"><a class="page-link"
-				href="main.jsp?listPage = 1" onclick="search()">1</a></li>
-			<li class="page-item"><a class="page-link"
-				href="main.jsp?listPage = 2" onclick="search()">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
 			<li class="page-item"><a class="page-link" href="#">3</a></li>
 			<li class="page-item"><a class="page-link" href="#"
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
@@ -187,52 +181,64 @@
 
 
 	<script type="text/javascript">
-		localStorage.setItem("key", "${key}");
+      localStorage.setItem("key", "${key}");
 
-		var searchKey = localStorage.getItem("key");
-		
-		window.onbeforeunload = () => {
-			localStorage.removeItem("key");
-			searchKey = null;
-		}
+      var searchKey = localStorage.getItem("key");
+      
+      window.onbeforeunload = () => {
+         localStorage.removeItem("key");
+         searchKey = null;
+      }
+   
+      let searchData = document.getElementById('keyword');
+      
+      
+      const pageSearch = document.getElementsByClassName("page-item");
+      
+      for(let i = 0; i < pageSearch.length; i ++) {
+    	  pageSearch[i].addEventListener("click", (e) => {
+         let page = e.target.innerText;
+         
+         axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
+               headers: {Authorization: searchKey},
+               params: { 'query' : searchData.value,
+                  'size' : 8,	
+                  'page' : page }
+         })
+         .then(res =>{ var bookDataList2 = res.data.documents; 
+         console.log(res.data);
+               for(var i = 0 ; i < 8 ; i++){
+                        document.getElementById("title"+ (i+1)).innerHTML= bookDataList2[i].title;
+                        document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList2[i].thumbnail+"' onclick= \" location.href= 'bookDetail.jsp?title="+bookDataList2[i].title+"'\"/>";
+                     };
+               }
+         
+         );
+         
+         }) 
+      }
+  
+       function search() {
 
-		
-		function search() {
-			var bookDataList = null;
-			<%String pageNum = request.getParameter("listPage");%>
-			var searchWebParam = {
-					'query' : $("#keyword").val(),
-					'size' : 8,
-					'page' : 2	
-				};
-			
-			$.ajax({
-				// 통신 방식
-					method: "GET",
-					
-				//API 주소
-					url: "https://dapi.kakao.com/v3/search/book?target=title",
-					data: searchWebParam,
-					headers: {Authorization: searchKey},
-					async: false
-				})
-					.done(function( msg ) {
-				
-							
-						bookDataList = msg;
-						
-			
-					})
-					
-					for(var i = 0 ; i < 8 ; i++){
-						
-						
-						document.getElementById("title"+ (i+1)).innerHTML= bookDataList.documents[i].title;
-						document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList.documents[i].thumbnail+"' onclick= \" location.href= 'BookDetail.jsp?title="+bookDataList.documents[i].title+"'\"/>";
-					};
-					
-		  };
-		  
+         let searchData = document.getElementById( 'keyword' ).value;
+     
+		axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
+             headers: {Authorization: searchKey},
+             params: { 'query' : searchData,
+                'size' : 8,	
+                'page' : 1 }
+       })
+       .then(res => { var bookDataList1 = res.data.documents;   	  				   	  			
+             for(var i = 0 ; i < 8 ; i++){
+                      document.getElementById("title"+ (i+1)).innerHTML= bookDataList1[i].title;
+                      document.getElementById("figure"+ (i+1)).innerHTML = "<img class='img-fluid' src='" + bookDataList1[i].thumbnail+"' onclick= \" location.href= 'bookDetail.jsp?title="+bookDataList1[i].title+"'\"/>";
+                   						};
+             		}
+       
+       		);
+
+         
+  };      
   </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"

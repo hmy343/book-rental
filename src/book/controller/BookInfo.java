@@ -28,10 +28,10 @@ import rental.model.rentalService;
 public class BookInfo extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 req.setCharacterEncoding("utf-8");
-		
+		 	
 		  String input =req.getParameter("data");
-		  System.out.println(input);
+		  HttpSession session = req.getSession();
+		  System.out.println(session.getAttribute("usId"));
 		
 		  
 		  JSONParser parser = new JSONParser();        
@@ -40,7 +40,7 @@ public class BookInfo extends HttpServlet {
 			  
 			JSONObject jsonObject = (JSONObject) parser.parse(input);
 			JSONObject jsonObj = (JSONObject) jsonObject;
-			
+		 
 			 String bkTumbnail = (String) jsonObj.get("thumbnail");
 			 String bkTitle = (String) jsonObj.get("title");
 			 String bkPublisher = (String) jsonObj.get("publisher");

@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import exception.ExistUserException;
 import user.dto.UserDTO;
 
@@ -23,10 +26,6 @@ public class UserService {
 
 	// 로그인
 	public UserDTO loginCheck(String usId, String usPw) throws SQLException {
-//		UserDTO user = UserDAO.loginCheck(usId, usPw);
-//		if (user != ) {
-//			return user;
-//		}
 		return UserDAO.loginCheck(usId, usPw);
 	}
 	
@@ -36,17 +35,27 @@ public class UserService {
 		return UserDAO.joinUser(UserDTO);
 	}
 	
-	// 전체 회원 검색
+	// 관리자 제외한 전체 회원 검색
 	public ArrayList<UserDTO> getAllUser() throws SQLException{
 		return UserDAO.getAllUser();
 	}
 	
 	// id 존재 여부 확인
-//	public void idCheck(String usId) throws ExistUserException, SQLException {
-//		String checkId = UserDAO.idCheck(usId);
-//		if(checkId != null) {
-//			throw new ExistUserException();
-//		}
-//	}
+	public boolean idCheck(String checkUsId) throws ExistUserException, SQLException {
+			
+		if(UserDAO.idCheck(checkUsId) == null) {
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	// grade 수정
+	public boolean updateGrade(String userId, String updateGrade) throws SQLException {
+		
+		return UserDAO.userGradeUpdate(userId, updateGrade);
+	}
+	
 	
 }

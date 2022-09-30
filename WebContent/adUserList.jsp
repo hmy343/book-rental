@@ -15,9 +15,12 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="./css/dashboard.css">
 <link href="./css/font.css" rel="stylesheet" type="text/css">
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
-<% 
-	String id = (String)session.getAttribute("usId");
+<%
+	String id = (String) session.getAttribute("usId");
 %>
 <body>
 	<!-- Navbar -->
@@ -31,9 +34,8 @@
 
 			<ul class="nav d-flex">
 				<li class="nav-item nav-link-3 text-nowrap">UserID</li>
-				<li class="nav-item">
-					<a class="nav-item nav-link-4 text-nowrap" href="./logout"
-					onclick="">LogOut</a></li>
+				<li class="nav-item"><a class="nav-item nav-link-4 text-nowrap"
+					href="./logout" onclick="">LogOut</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -52,26 +54,20 @@
 									viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
 										d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z" />
-                  </svg> Admin1
+                  </svg> UserList
 						</a></li>
+						
+						
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#"> <svg
+							aria-current="page" href="admin-rental"> <svg
 									xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 									fill="currentColor" class="bi bi-chevron-compact-right"
 									viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
 										d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z" />
-                  </svg> Admin2
+                  </svg> RentalList
 						</a></li>
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#"> <svg
-									xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-									fill="currentColor" class="bi bi-chevron-compact-right"
-									viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-										d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z" />
-                  </svg> Admin3
-						</a></li>
+
 					</ul>
 				</div>
 			</div>
@@ -123,11 +119,11 @@
 								</td>
 							</tr>
 						</c:if>
-						<c:forEach items="${requestScope.userList}" var="data">
-							<tr>
+						<c:forEach items="${requestScope.userList}" var="data" varStatus="status">
+							<tr class = "checkContainer">
 								<td scope="row"><input class="form-check-input"
-									type="checkbox" value="" id="flexCheckDefault"></td>
-								<td>${data.usId}</td>
+									type="checkbox" value="" id= "${status.index}" ></td>
+								<td class = "usId">${data.usId}</td>
 								<td>${data.usJoinDate}</td>
 								<td>${data.usBirtyDay}</td>
 								<td>${data.usPhnum}</td>
@@ -135,12 +131,12 @@
 								<td>${data.usEmailAgree}</td>
 								<td>${data.usOverdue}</td>
 								<td>${data.usStatus}</td>
-								<td><select name="us_grade">
+								<td><select name="us_grade" class = "us_grade">
 										<option value="" selected>${data.usGrade}</option>
-										<option value="bronze">B</option>
-										<option value="silver">S</option>
-										<option value="gold">G</option>
-										<option value="platinum">P</option>
+										<option value="B">bronze</option>
+										<option value="S">Silver</option>
+										<option value="G">Gold</option>
+										<option value="P">Platinum</option>
 								</select></td>
 							</tr>
 						</c:forEach>
@@ -148,12 +144,47 @@
 				</table>
 			</div>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				<button type="button" class="btn btn-primary">수정</button>
+				<button type="button" class="btn btn-primary" onclick="adUpdateList()">수정</button>
 			</div>
 		</main>
 	</div>
 
+	<script type="text/javascript">
+	
 
+	
+    const checkbox = document.getElementsByClassName("form-check-input");
+    const selectbox= document.getElementsByClassName("us_grade");
+	const checkContainer = document.getElementsByClassName("checkContainer");
+	
+	
+	let adUpdateId;
+	let gradeChange;
+	let seletedChange;
+	let	changeData;
+	let changeDatas = [];
+	 
+	function adUpdateList(){
+    for(let i = 0 ; i <checkbox.length; i++){
+    	   		
+   		if(checkbox[i].checked) {
+   			 adUpdateId = checkContainer[i].cells[1].innerHTML
+   			 gradeChange = checkContainer[i].children[9].children[0];
+   			 seletedChange = gradeChange.options[gradeChange.selectedIndex].value
+   			
+   			changeData = {"adUpdateId": adUpdateId, "seletedChange": seletedChange};
+   			changeDatas.push(changeData);
+
+    	    				}
+    	}
+    const dataSet = JSON.stringify(changeDatas);
+    console.log(dataSet);
+		axios.post("./changeuserlist",
+	
+	  {data : dataSet})    			
+	}
+   
+	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -166,7 +197,5 @@
 		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
 		integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
 		crossorigin="anonymous"></script>
-	<script src="dashboard.js"></script>
-
 </body>
 </html>

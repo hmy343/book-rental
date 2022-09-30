@@ -18,9 +18,6 @@ public class UserListController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 			try {
-//				for (UserDTO user : service.getAllUser()) {
-//					System.out.println(user);
-//				}
 				req.setAttribute("userList", service.getAllUser());
 				req.getRequestDispatcher("adUserList.jsp").forward(req, resp);
 				

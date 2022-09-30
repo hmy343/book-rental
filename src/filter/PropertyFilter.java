@@ -3,6 +3,7 @@ package filter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import javax.servlet.Filter;
@@ -15,7 +16,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(filterName = "/PropertyFilter", urlPatterns = { "/main.do", "/BookDetail.jsp", "/bookinfo" })
+@WebFilter(filterName = "/PropertyFilter", urlPatterns = { "/main.do", "/bookDetail.jsp", "/bookinfo" })
 public class PropertyFilter implements Filter {
 	String key;
 
@@ -31,6 +32,8 @@ public class PropertyFilter implements Filter {
 
 		chain.doFilter(request, response);
 
+		
+		
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

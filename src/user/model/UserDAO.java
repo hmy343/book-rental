@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+
 import user.dto.UserDTO;
 import util.DBUtil;
 
@@ -128,6 +130,35 @@ public class UserDAO {
 		}
 		
 		return result;
+	}
+
+	// 유저 grade 업데이트
+	public static boolean userGradeUpdate(String userId, String updateGrade) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String query="UPDATE TB_USERS SET US_GRADE = ? WHERE US_ID = ? ";
+		
+		
+		try {
+			
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+			
+
+			pstmt.setString(1, updateGrade);
+			pstmt.setString(2, userId);
+			
+			int result = pstmt.executeUpdate();
+			
+			if(result != 0) {
+				return true;
+			}
+
+			
+		}finally {
+			DBUtil.close(con, pstmt);
+		}
+		return false;
 	}
 
 }

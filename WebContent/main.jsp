@@ -193,10 +193,10 @@
       let searchData = document.getElementById('keyword');
       
       
-      const test = document.getElementsByClassName("page-item");
+      const pageSearch = document.getElementsByClassName("page-item");
       
-      for(let i = 0; i < test.length; i ++) {
-         test[i].addEventListener("click", (e) => {
+      for(let i = 0; i < pageSearch.length; i ++) {
+    	  pageSearch[i].addEventListener("click", (e) => {
          let page = e.target.innerText;
          
          axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
